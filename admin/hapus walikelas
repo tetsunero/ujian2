@@ -1,0 +1,28 @@
+//hapuswali
+              elseif($pg=='hapuswali') {
+                cek_session_admin();
+                  if($ac==='hapus') {
+                    $id = $_GET['id'];
+                    $info = info("Anda yakin akan menghapus wali kelas ini?");
+                    if(isset($_POST['submit'])) {
+                      $exec = mysql_query("DELETE FROM walikls WHERE idwali='$id'");
+                      (!$exec) ? $info = info("Gagal menghapus!","NO") : jump("?pg=walikelas");
+            }
+            echo "
+                <form action='' method='post'>
+                <div class='box box-danger'>
+                  <div class='box-header with-border'>
+                  <h3 class='box-title'>Hapus</h3>
+                  <div class='box-tools pull-right btn-group'>
+                  <button type='submit' name='submit' class='btn btn-sm btn-danger'><i class='fa fa-trash-o'></i> Hapus</button>
+                  <a href='?pg=walikelas' class='btn btn-sm btn-default' title='Batal'><i class='fa fa-times'></i></a>
+                </div>
+                </div><!-- /.box-header -->
+                <div class='box-body'>
+                  $info
+                </div><!-- /.box-body -->
+                </div><!-- /.box -->
+                </form>
+                ";
+              }
+            }
