@@ -5266,7 +5266,7 @@
 														<button name='sync' class='btn btn-primary'><i class='fa fa-database'></i> Sinkron Data</button>
 														<button name='sync2' class='btn btn-primary'><i class='fa fa-database'></i> Install Data</button>		
 														<button name='sync3' class='btn btn-primary'><i class='fa fa-database'></i> Update Aplikasi</button>	
-														<button name='sync3' class='btn btn-primary'><i class='fa fa-database'></i> Install Update Aplikasi</button>														
+														<button name='sync4' class='btn btn-primary'><i class='fa fa-database'></i> Install Update Aplikasi</button>														
 												</div><!-- /.box-body -->
 											</div><!-- /.box -->
 										</div>
