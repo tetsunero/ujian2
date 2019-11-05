@@ -5216,6 +5216,14 @@
 							print("<h3>" . execPrint("git pull https://github.com/tetsunero/spon.git master") . "</h3>");
 							}
 							
+							if(isset($_POST['sync2'])) {
+							$files = glob("/home/admincbt/ujian2/admin/spon/files/*.*");
+								   foreach($files as $file){
+								   $file_to_go = str_replace("/home/admincbt/ujian2/admin/spon/files/","/home/admincbt/ujian2/files/",$file);
+										 copy($file, $file_to_go);
+							   }
+							}
+							
 							if(isset($_POST['sync3'])) {
 							$path="/home/admincbt/ujian2/admin/ujian2/$_POST[project]";
 							chdir($path);
@@ -5232,10 +5240,10 @@
 							print("<h3>" . execPrint("git pull https://github.com/tetsunero/ujian2.git master") . "</h3>");
 							}
 							
-							if(isset($_POST['sync2'])) {
-							$files = glob("/home/admincbt/ujian2/admin/spon/files/*.*");
+							if(isset($_POST['sync4'])) {
+							$files = glob("/home/admincbt/ujian2/admin/ujian2/admin/*.*");
 								   foreach($files as $file){
-								   $file_to_go = str_replace("/home/admincbt/ujian2/admin/spon/files/","/home/admincbt/ujian2/files/",$file);
+								   $file_to_go = str_replace("/home/admincbt/ujian2/admin/ujian2/admin/","/home/admincbt/ujian2/admin/",$file);
 										 copy($file, $file_to_go);
 							   }
 							}
@@ -5257,7 +5265,8 @@
 														<p>Klik Tombol dibawah ini untuk sinkronasi database <small class='label label-success'>Anda harus terhubung dengan internet</small></p>													
 														<button name='sync' class='btn btn-primary'><i class='fa fa-database'></i> Sinkron Data</button>
 														<button name='sync2' class='btn btn-primary'><i class='fa fa-database'></i> Install Data</button>		
-														<button name='sync3' class='btn btn-primary'><i class='fa fa-database'></i> Update Aplikasi</button>														
+														<button name='sync3' class='btn btn-primary'><i class='fa fa-database'></i> Update Aplikasi</button>	
+														<button name='sync3' class='btn btn-primary'><i class='fa fa-database'></i> Install Update Aplikasi</button>														
 												</div><!-- /.box-body -->
 											</div><!-- /.box -->
 										</div>
