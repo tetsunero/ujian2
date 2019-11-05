@@ -5220,8 +5220,36 @@
 							$files = glob("/home/admincbt/ujian2/admin/spon/files/*.*");
 								   foreach($files as $file){
 								   $file_to_go = str_replace("/home/admincbt/ujian2/admin/spon/files/","/home/admincbt/ujian2/files/",$file);
-										 copy($file, $file_to_go);
+										 copy($file, $file_to_go);										  
 							   }
+							echo "
+			<script src='../plugins/jQuery/jquery-3.1.1.min.js'></script>
+			<script src='../dist/bootstrap/js/bootstrap.min.js'></script>
+			<script >$(document).ready(function () {
+				$('#modal-default').modal('show');
+			});</script>
+					<div class='modal fade' id='modal-default' >
+					  <div class='modal-dialog'>
+						<div class='modal-content'>
+						  <div class='modal-header'>
+							<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+							  <span aria-hidden='true'>×</span></button>
+							<h4 class='modal-title'>Perhatian</h4>
+						  </div>
+						  <div class='modal-body'>
+							<p>Data file berhasil di instal</p>
+						  </div>
+						  <div class='modal-footer'>
+							<button type='button' class='btn btn-default' data-dismiss='modal'>Oke</button>
+							
+						  </div>
+						</div>
+						<!-- /.modal-content -->
+					  </div>
+					  <!-- /.modal-dialog -->
+					</div>
+											
+				";  
 							}
 							
 							if(isset($_POST['sync3'])) {
@@ -5246,6 +5274,34 @@
 								   $file_to_go = str_replace("/home/admincbt/ujian2/admin/ujian2/admin/","/home/admincbt/ujian2/admin/",$file);
 										 copy($file, $file_to_go);
 							   }
+echo "
+			<script src='../plugins/jQuery/jquery-3.1.1.min.js'></script>
+			<script src='../dist/bootstrap/js/bootstrap.min.js'></script>
+			<script >$(document).ready(function () {
+				$('#modal-default').modal('show');
+			});</script>
+					<div class='modal fade' id='modal-default' >
+					  <div class='modal-dialog'>
+						<div class='modal-content'>
+						  <div class='modal-header'>
+							<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+							  <span aria-hidden='true'>×</span></button>
+							<h4 class='modal-title'>Selamat</h4>
+						  </div>
+						  <div class='modal-body'>
+							<p>Aplikasi berhasil diperbarui</p>
+						  </div>
+						  <div class='modal-footer'>
+							<button type='button' class='btn btn-default' data-dismiss='modal'>Oke</button>
+							
+						  </div>
+						</div>
+						<!-- /.modal-content -->
+					  </div>
+					  <!-- /.modal-dialog -->
+					</div>
+											
+				";  							   
 							}
 							
 							$admin = mysql_fetch_array(mysql_query("SELECT * FROM pengawas WHERE level='admin' AND id_pengawas='1'"));
@@ -5264,7 +5320,7 @@
 													<div class='box-body'>												
 														<p>Klik Tombol dibawah ini untuk sinkronasi database <small class='label label-success'>Anda harus terhubung dengan internet</small></p>													
 														<button name='sync' class='btn btn-primary'><i class='fa fa-database'></i> Sinkron Data</button>
-														<button name='sync2' class='btn btn-primary'><i class='fa fa-database'></i> Install Data</button>		
+														<button name='sync2' class='btn btn-primary' id='mymodal'><i class='fa fa-database'></i> Install Data</button>		
 														<button name='sync3' class='btn btn-primary'><i class='fa fa-database'></i> Update Aplikasi</button>	
 														<button name='sync4' class='btn btn-primary'><i class='fa fa-database'></i> Install Update Aplikasi</button>														
 												</div><!-- /.box-body -->
