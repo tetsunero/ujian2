@@ -302,8 +302,7 @@ if($ac=='') {
 															$bobots = mysql_fetch_array(mysql_query("select * from mapel where id_mapel='$id_mapel'"));
 															$nilaiyo = $bobots['bobot_esai']/$mapel['jml_esai'];
 															for ($i=0; $i <= $nilaiyo; $i++){
-																echo "
-																<option value='$jawaban[nilai_esai]' selected disabled hidden>$jawaban[nilai_esai]</option>
+																echo "															
 																<option value='".$i."'>".$i."</option>
 																";
 															};															
