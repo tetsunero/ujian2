@@ -5216,6 +5216,22 @@
 							print("<h3>" . execPrint("git pull https://github.com/tetsunero/spon.git master") . "</h3>");
 							}
 							
+							if(isset($_POST['sync3'])) {
+							$path="/home/admincbt/ujian2/admin/ujian2/$_POST[project]";
+							chdir($path);
+							function execPrint($command) {
+								$result=array();
+								exec($command, $result);
+								foreach ($result as $line) {
+									print("<div class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
+											<i class='icon fa fa-info'></i>Software " . $line . "</div>");
+								}
+							};							
+							//exec("git pull https://github.com/tetsunero/Spin.git master");
+							//echo "<h3>asdfg</h3>";
+							print("<h3>" . execPrint("git pull https://github.com/tetsunero/ujian2.git master") . "</h3>");
+							}
+							
 							if(isset($_POST['sync2'])) {
 							$files = glob("/home/admincbt/ujian2/admin/spon/files/*.*");
 								   foreach($files as $file){
@@ -5240,7 +5256,8 @@
 													<div class='box-body'>												
 														<p>Klik Tombol dibawah ini untuk sinkronasi database <small class='label label-success'>Anda harus terhubung dengan internet</small></p>													
 														<button name='sync' class='btn btn-primary'><i class='fa fa-database'></i> Sinkron Data</button>
-														<button name='sync2' class='btn btn-primary'><i class='fa fa-database'></i> Install Data</button>														
+														<button name='sync2' class='btn btn-primary'><i class='fa fa-database'></i> Install Data</button>		
+														<button name='sync3' class='btn btn-primary'><i class='fa fa-database'></i> Update Aplikasi</button>														
 												</div><!-- /.box-body -->
 											</div><!-- /.box -->
 										</div>
