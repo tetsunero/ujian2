@@ -29,19 +29,54 @@
 													}
 												}
 											}
+								if(isset($_POST['csw'])) {
+								mysql_query("TRUNCATE siswa");
+								jump('?pg=siswa');
+								}
 										
 							echo "
 								<div class='row'>
 									<div class='col-md-12'>
-										<div class='box box-solid'>
+										<div class='box '>
 											<div class='box-header with-border '>
 												<h3 class='box-title'><i class='fa fa-group'></i> Peserta Ujian</h3>
                                                 <div class='box-tools btn-group'>";
 												if($pengawas['level']=='admin'){
-												echo "
-													<a data-toggle='modal' data-target='#tambahsiswa' class='btn btn-sm btn-primary'><i class='fa fa-check'></i> Tambah</a>
-                                                   												
-													<a href='?pg=uplfotosiswa' class='btn btn-sm btn-primary'><i class='fa fa-image'></i> Upload Foto</a>";
+												echo "												
+													<button data-toggle='modal' data-target='#tambahsiswa' class='btn btn-sm btn-primary'><i class='fa fa-check'></i> Tambah</button>
+													<button data-toggle='modal' data-target='#clearsiswe' class='btn btn-danger btn-sm' title='Kosongkan Siswa'><i class='fa fa-trash-o'></i> Kosongkan Siswa</button>	
+													<!--<a href='?pg=uplfotosiswa' class='btn btn-sm btn-primary'><i class='fa fa-image'></i> Upload Foto</a>-->
+														<script src='../plugins/jQuery/jquery-3.1.1.min.js'></script>
+														<script src='../dist/bootstrap/js/bootstrap.min.js'></script>
+														<script >$(document).ready(function () {
+															$('#modal-default').modal('show');
+														});</script>
+														<form action='' method='post'>
+																<div class='modal fade' id='clearsiswe' >
+																  <div class='modal-dialog'>
+																	<div class='modal-content'>
+																	  <div class='modal-header'>
+																		<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+																		  <span aria-hidden='true'>×</span></button>
+																		<h4 class='modal-title'>Perhatian</h4>
+																	  </div>
+																	  <div class='modal-body'>
+																		<p>Kosongkan data siswa?</p>
+																	  </div>
+																	  <div class='modal-footer'>
+																		<button type='button' class='btn btn-default' data-dismiss='modal' aria-label='Close'> Batal</button>
+																		<button type='submit' name='csw' class='btn btn-sm btn-primary'><i class='fa fa-check'></i> Oke</button>
+																		
+																	  </div>
+																	</div>
+																	<!-- /.modal-content -->
+																  </div>
+																  <!-- /.modal-dialog -->
+																</div>	
+													</form>																
+													
+													
+													";
 												}
 													echo "
                                                 </div>

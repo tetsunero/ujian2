@@ -725,6 +725,9 @@
 							}if($ac=='clearpengumuman') {
 								mysql_query("TRUNCATE pengumuman");
 								jump('?');
+							}if($ac=='clearsiswa') {
+								mysql_query("TRUNCATE siswa");
+								jump('?');
 							}
 						}
 						if($pengawas['level']=='guru') {

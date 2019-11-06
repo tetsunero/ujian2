@@ -292,27 +292,28 @@ if($ac=='') {
 															
 															echo "
 															<tr><input type='hidden' value='$jawaban[id_soal]' name='idsoal[$no]'>
-															<td>$no</td>
-															<td>$gambar $gambar2 $soal[soal]<p><b>Jawaban :</b> $jawaban[esai]</td>
-															<td>
-															<!--<input type='hidden' class='form-control' value='$jawaban[nilai_esai]' name='nilaiesai[$no]'>-->
-																																
-															<select name='nilaiesai[$no]' class='form-control' required='true'>
-															";
-															$bobots = mysql_fetch_array(mysql_query("select * from mapel where id_mapel='$id_mapel'"));
-															$nilaiyo = $bobots['bobot_esai']/$mapel['jml_esai'];
-															for ($i=0; $i <= $nilaiyo; $i++){
-																echo "															
-																<option value='".$i."'>".$i."</option>
-																";
-															};															
-																echo "																																	
-															</select>
-																	 
-																	</td>
+																	<td>$no</td>
+																	<td>$gambar $gambar2 $soal[soal]<p><b>Jawaban :</b> $jawaban[esai]</td>
+																	<td><input type='text' class='form-control' value='$jawaban[nilai_esai]' name='nilaiesai[$no]'></td>
 																	
-																</tr>
+															</tr>																	
+															<!--<select name='nilaiesai[$no]' class='form-control' required='true'>-->
 															";
+															// INI ARRAY UNTUK SCROLL OPTION
+															//$bobots = mysql_fetch_array(mysql_query("select * from mapel where id_mapel='$id_mapel'"));
+															//$nilaiyo = $bobots['bobot_esai']/$mapel['jml_esai'];
+															//for ($i=0; $i <= $nilaiyo; $i++){
+															//	echo "															
+															//	<option value='".$i."'>".$i."</option>
+															//	";
+															//};															
+															//	echo "																																	
+															//</select>
+																	 
+																	//</td>
+																	
+																//</tr>
+															//";
 														}
 														echo "
 														</tbody>
