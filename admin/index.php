@@ -483,13 +483,13 @@
 					
 					<div class='content-wrapper' style='background-image: url(backgroun.jpg);background-size: cover;'>
 					<section class='content-header'>
-								<h1>
-								&nbsp;<span class='hidden-xs'>$setting[aplikasi]</span>
-								
+								<h1><span class='hidden-xs'>$setting[aplikasi] </span>
+								<small class='label bg-blue'><strong>V 1.0 r4</strong>
+								</small>
 								</h1><div style='float:right; margin-top:-37px'>
 								
-								<button class='btn  btn-flat  bg-purple' ><i class='fa fa-calendar'></i> ".buat_tanggal('D, d M Y')."</button>
-								<button class='btn  btn-flat  btn-danger' ><span id='waktu'>$waktu </span></button>
+								<button class='btn  btn-flat pull-right bg-purple' ><i class='fa fa-calendar'></i> ".buat_tanggal('D, d M Y')."</button>
+								<button class='btn  btn-flat pull-right btn-danger' ><span id='waktu'>$waktu </span></button>
 								
 								</div>
 								<div class='breadcrumb'>
@@ -1220,6 +1220,11 @@
 						}
 						elseif($pg=='guru') {
 						cek_session_admin();
+						if(isset($_POST['clearguru'])) {
+							mysql_query("TRUNCATE walikls");
+							mysql_query("DELETE FROM pengawas where level='guru'");
+							jump('?pg=guru');
+						}
 						echo "
 								<div class='row'>
 									<div class='col-md-8'>
@@ -1227,8 +1232,37 @@
 											<div class='box-header with-border'>
 												<h3 class='box-title'>Manajemen Guru</h3>
 												<div class='box-tools pull-right btn-group'>
-													<a href='?pg=importguru' class='btn btn-sm btn-primary'><i class='fa fa-upload'></i> Import Guru</a>
+													<a href='?pg=importguru' class='btn btn-sm btn-primary'><i class='fa fa-upload'></i> Import Guru</a>													
+												<button data-toggle='modal' data-target='#clearguru' class='btn btn-danger btn-sm' title='Kosongkan Wali Kelas'><i class='fa fa-trash-o'></i> Kosongkan Guru</button>	
 												</div>
+														<script src='../plugins/jQuery/jquery-3.1.1.min.js'></script>
+														<script src='../dist/bootstrap/js/bootstrap.min.js'></script>
+														<script >$(document).ready(function () {
+															$('#modal-default').modal('show');
+														});</script>
+														<form action='' method='post'>
+																<div class='modal fade' id='clearguru' >
+																  <div class='modal-dialog'>
+																	<div class='modal-content'>
+																	  <div class='modal-header'>
+																		<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+																		  <span aria-hidden='true'>×</span></button>
+																		<h4 class='modal-title'>Perhatian</h4>
+																	  </div>
+																	  <div class='modal-body'>
+																		<p>Kosongkan semua data Guru?</p>
+																	  </div>
+																	  <div class='modal-footer'>
+																		<button type='button' class='btn btn-default' data-dismiss='modal' aria-label='Close'> Batal</button>
+																		<button type='submit' name='clearguru' class='btn btn-sm btn-primary'><i class='fa fa-check'></i> Oke</button>
+																		
+																	  </div>
+																	</div>
+																	<!-- /.modal-content -->
+																  </div>
+																  <!-- /.modal-dialog -->
+																</div>	
+													</form>
 											</div><!-- /.box-header -->
 											<div class='box-body'>
 											<div class='table-responsive'>
@@ -5083,11 +5117,31 @@
 								$header = nl2br($_POST['header']);
 								$exec = mysql_query("UPDATE setting SET nama_ujian='$_POST[namaujian]',aplikasi='$_POST[aplikasi]',sekolah='$_POST[sekolah]',kode_sekolah='$_POST[kode]',jenjang='$_POST[jenjang]',kepsek='$_POST[kepsek]',nip='$_POST[nip]',alamat='$alamat',kecamatan='$_POST[kecamatan]',kota='$_POST[kota]',telp='$_POST[telp]',fax='$_POST[fax]',web='$_POST[web]',email='$_POST[email]',header='$header',ip_server='$_POST[ipserver]',waktu='$_POST[waktu]' WHERE id_setting='1'");
 								if($exec) {
-									$pesane= "<div class='alert alert-success alert-dismissible'>
-											<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
-											<i class='icon fa fa-info'></i>
-											Berhasil menyimpan pengaturan!
-											</div>";
+									$pesane= "<script src='../plugins/jQuery/jquery-3.1.1.min.js'></script>
+			<script src='../dist/bootstrap/js/bootstrap.min.js'></script>
+			<script >$(document).ready(function () {
+				$('#modal-default').modal('show');
+			});</script>
+					<div class='modal fade' id='modal-default' >
+					  <div class='modal-dialog'>
+						<div class='modal-content'>
+						  <div class='modal-header'>
+							<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+							  <span aria-hidden='true'>×</span></button>
+							<h4 class='modal-title'>Perhatian</h4>
+						  </div>
+						  <div class='modal-body'>
+							<p>Berhasil menyimpan pengaturan.</p>
+						  </div>
+						  <div class='modal-footer'>
+							<button type='button' class='btn btn-default' data-dismiss='modal'>Oke</button>
+							
+						  </div>
+						</div>
+						<!-- /.modal-content -->
+					  </div>
+					  <!-- /.modal-dialog -->
+					</div>";
 									$info1 = info('Berhasil menyimpan pengaturan!','OK');
 									if($_FILES['logo']['name']<>'') {
 										$logo = $_FILES['logo']['name'];
@@ -5111,7 +5165,7 @@
 									if($_FILES['logo_header']['name']<>'') {
 										$logo = $_FILES['logo_header']['name'];
 										$temp = $_FILES['logo_header']['tmp_name'];
-										$dest = 'dist/img/logo_header.png';
+										$dest = 'dist/img/logo_header.png';										
 										$upload = move_uploaded_file($temp,'../'.$dest);
 										if($upload) {
 											$exec = mysql_query("UPDATE setting SET logo_header='$dest' WHERE id_setting='1'");
@@ -5170,11 +5224,31 @@
 									}
 								} else {
 									$info1 = info('Gagal menyimpan pengaturan!','NO');
-									$pesane= "<div class='alert alert-warning alert-dismissible'>
-											<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
-											<i class='icon fa fa-info'></i>
-											Gagal menyimpan pengaturan!
-											</div>";
+									$pesane= "<script src='../plugins/jQuery/jquery-3.1.1.min.js'></script>
+			<script src='../dist/bootstrap/js/bootstrap.min.js'></script>
+			<script >$(document).ready(function () {
+				$('#modal-danger').modal('show');
+			});</script>
+					<div class='modal modal-danger fade' id='modal-danger' >
+					  <div class='modal-dialog'>
+						<div class='modal-content'>
+						  <div class='modal-header'>
+							<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+							  <span aria-hidden='true'>×</span></button>
+							<h4 class='modal-title'>Perhatian</h4>
+						  </div>
+						  <div class='modal-body'>
+							<p>Gagal menyimpan pengaturan.</p>
+						  </div>
+						  <div class='modal-footer'>
+							<button type='button' class='btn btn-default' data-dismiss='modal'>Oke</button>
+							
+						  </div>
+						</div>
+						<!-- /.modal-content -->
+					  </div>
+					  <!-- /.modal-dialog -->
+					</div>";
 								}
 							}
 							
@@ -5185,7 +5259,7 @@
 											<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
 											<i class='icon fa fa-info'></i>
 											Password Admin salah!
-											</div>";;									
+											</div>";									
                                 } else {
                                     if(!empty($_POST['data'])) {
                                         $data = $_POST['data'];
@@ -5255,22 +5329,50 @@
 				";  
 							}
 							
-							if(isset($_POST['sync3'])) {
+							if(isset($_POST['sync3'])) {								
 							$path="/home/admincbt/ujian2/admin/ujian2/$_POST[project]";
 							chdir($path);
 							function execPrint($command) {
 								$result=array();
 								exec($command, $result);
 								foreach ($result as $line) {
-									print("<div class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
-											<i class='icon fa fa-info'></i>Software " . $line . "</div>");
+									
+									echo "
+			<script src='../plugins/jQuery/jquery-3.1.1.min.js'></script>
+			<script src='../dist/bootstrap/js/bootstrap.min.js'></script>
+			<script >$(document).ready(function () {
+				$('#modal-default').modal('show');
+			});</script>
+					<div class='modal fade' id='modal-default' >
+					  <div class='modal-dialog'>
+						<div class='modal-content'>
+						  <div class='modal-header'>
+							<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+							  <span aria-hidden='true'>×</span></button>
+							<h4 class='modal-title'>Perhatian! </h4>
+						  </div>
+						  <div class='modal-body'>
+							<p><div class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button><i class='icon fa fa-info'></i>Software " . $line . "</div>Update Berhasil, silahkan tekan tombol Install update aplikasi</p>
+						  </div>
+						  <div class='modal-footer'>
+							<button name='sync4' class='btn btn-primary' data-dismiss='modal'><i class='fa fa-check'></i> Oke</button>
+							
+						  </div>
+						</div>
+						<!-- /.modal-content -->
+					  </div>
+					  <!-- /.modal-dialog -->
+					</div>
+											
+				";	
 								}
 							};							
 							//exec("git pull https://github.com/tetsunero/Spin.git master");
 							//echo "<h3>asdfg</h3>";
 							print("<h3>" . execPrint("git pull https://github.com/tetsunero/ujian2.git master") . "</h3>");
+						
 							}
-							
+
 							if(isset($_POST['sync4'])) {
 							$files = glob("/home/admincbt/ujian2/admin/ujian2/admin/*.*");
 								   foreach($files as $file){
@@ -5305,7 +5407,8 @@ echo "
 					</div>
 											
 				";  							   
-							}
+							}							
+												
 							
 							$admin = mysql_fetch_array(mysql_query("SELECT * FROM pengawas WHERE level='admin' AND id_pengawas='1'"));
 							$setting = mysql_fetch_array(mysql_query("SELECT * FROM setting WHERE id_setting='1'"));
@@ -5321,11 +5424,11 @@ echo "
 											<div class='box box-primary'>
 												<div class='box-header with-border'>
 													<div class='box-body'>												
-														<p>Klik Tombol dibawah ini untuk sinkronasi database <small class='label label-success'>Anda harus terhubung dengan internet</small></p>													
-														<button name='sync' class='btn btn-primary'><i class='fa fa-database'></i> Sinkron Data</button>
+														<p>Klik Tombol dibawah ini untuk sinkronasi atau update aplikasi, jangan lupa install setelah berhasil download <label class='label label-success'>Jika menggunakan tombol di bawah ini, pastikan komputer Anda terhubung dengan internet</label></p>													
+														<button name='sync' class='btn btn-primary'><i class='fa fa-download'></i> Sinkron Data</button>
 														<button name='sync2' class='btn btn-primary' id='mymodal'><i class='fa fa-database'></i> Install Data</button>		
-														<button name='sync3' class='btn btn-primary'><i class='fa fa-database'></i> Update Aplikasi</button>	
-														<button name='sync4' class='btn btn-primary'><i class='fa fa-database'></i> Install Update Aplikasi</button>														
+														<button name='sync3' class='btn btn-success'><i class='fa fa-download'></i> Update Aplikasi</button>	
+														<button name='sync4' class='btn btn-success'><i class='fa fa-database'></i> Install Update Aplikasi</button>														
 												</div><!-- /.box-body -->
 											</div><!-- /.box -->
 										</div>
@@ -5458,7 +5561,7 @@ echo "
 																	<div class='form-group'>
 																		<div class='row'>
 																			<div class='col-md-6'>																		
-																				<img class='img img-responsive' src='$homeurl/$setting[logo_header]'height='100'/>
+																				<img class='img img-responsive' src='$homeurl/$setting[logo_header]' height='100'/>
 																			</div>
 																			<div class='col-md-12'>
 																				<label>Logo Header</label>
