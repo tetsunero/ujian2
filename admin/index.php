@@ -484,7 +484,7 @@
 					<div class='content-wrapper' style='background-image: url(backgroun.jpg);background-size: cover;'>
 					<section class='content-header'>
 								<h1><span class='hidden-xs'>$setting[aplikasi] </span>
-								<small class='label bg-blue'><strong>V 1.0 r4</strong>
+								<small class='label bg-blue'><strong>V 1.0 r5</strong>
 								</small>
 								</h1><div style='float:right; margin-top:-37px'>
 								
