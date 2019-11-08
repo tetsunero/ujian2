@@ -5282,6 +5282,7 @@
                                     }
                                 }
 							}
+							
 							if(isset($_POST['sync'])) {
 							$path="/home/admincbt/ujian2/admin/spon/$_POST[project]";
 							chdir($path);
