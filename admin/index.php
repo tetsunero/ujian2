@@ -486,8 +486,7 @@
 								<h1><span class='hidden-xs'>$setting[aplikasi] </span>
 								<small class='label bg-blue'><strong>V 1.0 r5</strong>
 								</small>
-								</h1><div style='float:right; margin-top:-37px'>
-								
+								</h1><div style='float:right; margin-top:-37px'>								
 								<button class='btn  btn-flat pull-right bg-purple' ><i class='fa fa-calendar'></i> ".buat_tanggal('D, d M Y')."</button>
 								<button class='btn  btn-flat pull-right btn-danger' ><span id='waktu'>$waktu </span></button>
 								
@@ -1684,10 +1683,12 @@
 											
 												<div class='modal-header bg-blue'>
 												<button  class='close' data-dismiss='modal'><span aria-hidden='true'><i class='glyphicon glyphicon-remove'></i></span></button>
-													<h3 class='modal-title'>Tambah Jadwal Ujian</h3>
-													
+													<h3 class='modal-title'>Tambah Jadwal Ujian</h3>													
 												</div>
 												<div class='modal-body'>
+												<div class='alert alert-danger '>
+													<i class='icon fa fa-info'></i> Sebelum ujian jangan lupa kosongkan Pengacak soal dan opsi
+												</div>
 												<form action='' method='post'>
 														
 															<div class='form-group'>
@@ -1782,11 +1783,20 @@
 										
 													<div class='box'>
 														<div class='box-header with-border '>
-															<h3 class='box-title'><i class='fa fa-clock-o'></i> Jadwal Ujian</h3>
+															<h3 class='box-title'><i class='fa fa-clock-o'></i> Jadwal Ujian | </h3>
+															<small class='label bg-blue'> Sebelum ujian dimulai, silahkan reset pengacak soal </small>
 															<div class='box-tools pull-right btn-group'>";
+															if($ac=='clearacak') {
+																	mysql_query("TRUNCATE pengacak");
+																	mysql_query("TRUNCATE pengacakopsi");
+																	jump('?pg=jadwal');
+																}
 															if($pengawas['level']=='admin') {
-															echo "
-																<a id='btnhapusjadwal' class='btn btn-sm btn-danger'><i class='glyphicon glyphicon-trash'></i> Kosongkan</a>";
+																
+															echo "																
+																<a href='?pg=$pg&ac=clearacak' class='btn btn-success btn-sm' title='Reset Pengacak Soal'><i class='glyphicon glyphicon-refresh'></i> Reset Pengacak Soal</a>
+																<a id='btnhapusjadwal' class='btn btn-sm btn-danger'><i class='glyphicon glyphicon-trash'></i> Kosongkan Jadwal</a>
+																";
 															} echo "
 																<button  class='btn btn-sm btn-primary' data-toggle='modal' data-target='#tambahjadwal'><i class='glyphicon glyphicon-plus'></i> Tambah Jadwal</button>
 															</div>
@@ -1906,6 +1916,9 @@
 															<h3 class='modal-title'>Edit Jadwal Ujian</h3>
 															</div>
 															<div class='modal-body'>
+															<div class='alert alert-danger '>
+																<i class='icon fa fa-info'></i> Sebelum ujian jangan lupa kosongkan Pengacak soal dan opsi di pengaturan
+															</div>
 															<form action='' method='post'>
 															<div class='form-group'>
 																<label>Nama Ujian</label>
@@ -5426,361 +5439,321 @@ echo "
 										</div>
 										</form>
 									</div>
-									
-									<div class='col-md-6'>
-										<form action='' method='post' enctype='multipart/form-data'>
-											<div class='box box-primary'>
-												<div class='box-header with-border'>
-													<h3 class='box-title'>Pengaturan Aplikasi</h3>
-													<div class='box-tools pull-right btn-group'>
-														<button type='submit' name='submit1' class='btn btn-sm btn-primary'><i class='fa fa-check'></i> Simpan</button>
-													</div>
-												</div><!-- /.box-header -->
-												<div class='box-body'>
-													$info1
-													<div class='form-group'>
-														<label>Nama Aplikasi</label>
-														<input type='text' name='aplikasi' value='$setting[aplikasi]' class='form-control' required='true'/>
-													</div>
-													<div class='form-group'>
-														<label>Nama Ujian</label>
-														<input type='text' name='namaujian' value='$setting[nama_ujian]' class='form-control' required='true'/>
-													</div>
-													<div class='form-group'>
-														<div class='row'>
-														<div class='col-md-6'>
-														<label>Nama Sekolah</label>
-														<input type='text' name='sekolah' value='$setting[sekolah]' class='form-control' required='true'/>
-														</div>
-														<div class='col-md-6'>
-														<label>Kode Sekolah</label>
-														<input type='text' name='kode' value='$setting[kode_sekolah]' class='form-control' required='true'/>
-														</div>
-														</div>
-													</div>
-													<div class='form-group'>
-														<div class='row'>
-														<div class='col-md-6'>
-														<label>Alamat Server / Ip Server</label>
-														<input type='text' name='ipserver' value='$setting[ip_server]' class='form-control'/>
-														</div>
-														<div class='col-md-6'>
-														<label>Waktu Server</label>
-															<select name='waktu' class='form-control' required='true'>
-																<option value='$setting[waktu]'>$setting[waktu]</option>
-																<option value='Asia/Jakarta'>Asia/Jakarta</option>
-																<option value='Asia/Makassar'>Asia/Makassar</option>
-																<option value='Asia/Jayapura'>Asia/Jayapura</option>
-																
-															</select>
-														</div>
-														</div>
-													</div>
-													 <div class='form-group' style='visibility:hidden;'>
-																<label>Jenjang</label>
-																<select name='jenjang' class='form-control' required='true'>
-																<option value='SMP'>$setting[jenjang]</option>
-																<option value='SD'>SD/MI</option>
-																<option value='SMP'>SMP/MTS</option>
-																<option value='SMK'>SMK/SMA/MA</option>
-																
-															</select>
-															</div> 													<div class='form-group'>
-														<label>Kepala Sekolah</label>
-														<input type='text' name='kepsek' value='$setting[kepsek]' class='form-control'/>
-													</div>
-													<div class='form-group'>
-														<label>NIP Kepala Sekolah</label>
-														<input type='text' name='nip' value='$setting[nip]' class='form-control'/>
-													</div>
-													<div class='form-group'>
-														<label>Alamat</label>
-														<textarea name='alamat' class='form-control' rows='3'>$setting[alamat]</textarea>
-													</div>
-													<div class='form-group'>
-														<div class='row'>
-															<div class='col-md-6'>
-																<label>Kecamatan</label>
-																<input type='text' name='kecamatan' value='$setting[kecamatan]' class='form-control'/>
+								</div><!-- end row update -->
+								$info1
+								$info4								
+								<div class='row'>
+									<div class='col-xs-12'>																						
+										<div class='nav-tabs-custom'>
+											<ul class='nav nav-tabs'>
+												<li class='active'><a href='#tab_a' data-toggle='tab' aria-expanded='true'>Pengaturan Umum</a></li>
+												<li class=''><a href='#tab_b' data-toggle='tab' aria-expanded='false'>Gambar</a></li>
+												<li class=''><a href='#tab_c' data-toggle='tab' aria-expanded='false'>Kosongkan Data</a></li>															
+												<li class=''><a href='#tab_d' data-toggle='tab' aria-expanded='false'>Backup/Restore</a></li>
+												<li class='pull-right'><a href='?pg=$pg' class='btn btn-sg' title='Batal'><i class='fa fa-times'></i></a></li>
+											</ul>
+											<div class='tab-content'>
+											<!-- TAB1 -->
+											<div class='tab-pane active' id='tab_a'>	
+												<form action='' method='post' enctype='multipart/form-data'>
+																											
+														<div class='box-body'>														
+															<div class='form-group'>
+																<label>Nama Aplikasi</label>
+																<input type='text' name='aplikasi' value='$setting[aplikasi]' class='form-control' required='true'/>
 															</div>
-															<div class='col-md-6'>
-																<label>Kota/Kabupaten</label>
-																<input type='text' name='kota' value='$setting[kota]' class='form-control'/>
+															<div class='form-group'>
+																<label>Nama Ujian</label>
+																<input type='text' name='namaujian' value='$setting[nama_ujian]' class='form-control' required='true'/>
 															</div>
-														</div>
-													</div>
-													<div class='form-group'>
-														<div class='row'>
-															<div class='col-md-6'>
-																<label>Telepon</label>
-																<input type='text' name='telp' value='$setting[telp]' class='form-control'/>
-															</div>
-															<div class='col-md-6'>
-																<label>Fax</label>
-																<input type='text' name='fax' value='$setting[fax]' class='form-control'/>
-															</div>
-														</div>
-													</div>
-													<div class='form-group'>
-														<div class='row'>
-															<div class='col-md-6'>
-																<label>Website</label>
-																<input type='text' name='web' value='$setting[web]' class='form-control'/>
-															</div>
-															<div class='col-md-6'>
-																<label>E-mail</label>
-																<input type='text' name='email' value='$setting[email]' class='form-control'/>
-															</div>
-														</div>
-													</div>
-<!-- LAPORAN -->
-													<div class='form-group'>
-														<label>Header Laporan</label>
-														<textarea name='header' class='form-control' rows='3'>$setting[header]</textarea>
-													</div>
-<!-- START ACCORDION -->						<div class='box-group' id='accordion'>					
-<!-- HEADER ADMIN -->								<div class='panel box box-danger'>
-														<a href=''>
-															<div class='box-header with-border' data-toggle='collapse' data-parent='#accordion' href='#collapseA' aria-expanded='false' class='collapsed'>
-															<h3 class='box-title'>
-																<img src='../dist/img/svg/add_image.svg' width='30'> Logo Header Admin
-															</h3>
-														</div>
-														</a>
-														<div id='collapseA' class='panel-collapse collapse' aria-expanded='false' style='height: 0px;'>
-															<div class='box-body'>
-																<div class='form-group'>
-																	<div class='form-group'>
-																		<div class='row'>
-																			<div class='col-md-6'>																		
-																				<img class='img img-responsive' src='$homeurl/$setting[logo_header]' height='100'/>
-																			</div>
-																			<div class='col-md-12'>
-																				<label>Logo Header</label>
-																				<input type='file' name='logo_header' class='form-control'/>
-																			</div>
-																		</div>
-																	</div>																
-																</div>
-															</div>
-														</div>
-													</div>
-
-<!-- LOGO KANAN  -->								<div class='panel box box-danger'>
-														<a href=''>
-															<div class='box-header with-border' data-toggle='collapse' data-parent='#accordion' href='#collapseB' aria-expanded='false' class='collapsed'>
-																<h4 class='box-title'>
-																	<img src='../dist/img/svg/add_image.svg' width='30'> Logo Sekolah Kanan
-																</h4>
-															</div>
-														</a>
-														<div id='collapseB' class='panel-collapse collapse' aria-expanded='false' style='height: 0px;'>
-															<div class='box-body'>
-																<div class='form-group'>
-																	<div class='form-group'>
-																		<div class='row'>																			
-																			<div class='col-md-6'>
-																				<img class='img img-responsive' src='$homeurl/$setting[logo]'height='100'/>
-																			</div>
-																			<div class='col-md-12'>
-																				<label>Logo Sekolah / Kanan</label>
-																				<input type='file' name='logo' class='form-control'/>
-																			</div>
-																		</div>
-																	</div>																
-																</div>
-															</div>
-														</div>
-													</div>
-																							
-<!-- LOGO INSTANSI KIRI -->					<div class='panel box box-danger'>
-												<a href=''>
-													<div class='box-header with-border' data-toggle='collapse' data-parent='#accordion' href='#collapseC' aria-expanded='false' class='collapsed'>
-														<h4 class='box-title'>
-															<img src='../dist/img/svg/add_image.svg' width='30'> Logo Instansi / Kiri
-														</h4>
-													</div>
-												</a>
-												<div id='collapseC' class='panel-collapse collapse' aria-expanded='false' style='height: 0px;'>
-													<div class='box-body'>
-														<div class='form-group'>
 															<div class='form-group'>
 																<div class='row'>
 																	<div class='col-md-6'>
-																		<img class='img img-responsive' src='$homeurl/$setting[logo_instansi]'height='100'/>
+																		<label>Nama Sekolah</label>
+																		<input type='text' name='sekolah' value='$setting[sekolah]' class='form-control' required='true'/>
 																	</div>
-																	<div class='col-md-12'>
-																		<label>Logo Instansi / Kiri</label>
-																		<input type='file' name='logo_instansi' class='form-control'/>
+																	<div class='col-md-6'>
+																		<label>Kode Sekolah</label>
+																		<input type='text' name='kode' value='$setting[kode_sekolah]' class='form-control' required='true'/>
 																	</div>
 																</div>
-															</div>																
-														</div>
-													</div>
-												</div>
-											</div>
-
-<!-- TTD LAPORAN -->							<div class='panel box box-danger'>
-												<a href=''>
-													<div class='box-header with-border' data-toggle='collapse' data-parent='#accordion' href='#collapseD' aria-expanded='false' class='collapsed'>
-														<h4 class='box-title'>
-															<img src='../dist/img/svg/add_image.svg' width='30'> Stempel & Tanda Tangan
-														</h4>
-													</div>
-												</a>
-												<div id='collapseD' class='panel-collapse collapse' aria-expanded='false' style='height: 0px;'>
-													<div class='box-body'>											
-													<div class='form-group'>
-														<div class='row'>
-															<div class='col-md-6'>
-																<img class='img img-responsive' src='$homeurl/$setting[logo_stempel]'height='100'/>
 															</div>
-															<div class='col-md-12'>
+															<div class='form-group'>
+																<div class='row'>
+																	<div class='col-md-6'>
+																		<label>Alamat Server / Ip Server</label>
+																		<input type='text' name='ipserver' value='$setting[ip_server]' class='form-control'/>
+																	</div>
+																	<div class='col-md-6'>
+																		<label>Waktu Server</label>
+																			<select name='waktu' class='form-control' required='true'>
+																			<option value='$setting[waktu]'>$setting[waktu]</option>
+																			<option value='Asia/Jakarta'>Asia/Jakarta</option>
+																			<option value='Asia/Makassar'>Asia/Makassar</option>
+																			<option value='Asia/Jayapura'>Asia/Jayapura</option>
+																		</select>
+																	</div>
+																</div>
+															</div>
+															<div class='form-group' style='visibility:hidden;'>
+																<label>Jenjang</label>
+																	<select name='jenjang' class='form-control' required='true'>
+																	<option value='SMP'>$setting[jenjang]</option>
+																	<option value='SD'>SD/MI</option>
+																	<option value='SMP'>SMP/MTS</option>
+																	<option value='SMK'>SMK/SMA/MA</option>
+																</select>
+															</div> 													
+															<div class='form-group'>
+																<label>Kepala Sekolah</label>
+																<input type='text' name='kepsek' value='$setting[kepsek]' class='form-control'/>
+															</div>
+															<div class='form-group'>
+																<label>NIP Kepala Sekolah</label>
+																<input type='text' name='nip' value='$setting[nip]' class='form-control'/>
+															</div>
+															<div class='form-group'>
+																<label>Alamat</label>
+																<textarea name='alamat' class='form-control' rows='3'>$setting[alamat]</textarea>
+															</div>
+															<div class='form-group'>
+																<div class='row'>
+																	<div class='col-md-6'>
+																		<label>Kecamatan</label>
+																		<input type='text' name='kecamatan' value='$setting[kecamatan]' class='form-control'/>
+																	</div>
+																	<div class='col-md-6'>
+																		<label>Kota/Kabupaten</label>
+																		<input type='text' name='kota' value='$setting[kota]' class='form-control'/>
+																	</div>
+																</div>
+															</div>
+															<div class='form-group'>
+																<div class='row'>
+																	<div class='col-md-6'>
+																		<label>Telepon</label>
+																		<input type='text' name='telp' value='$setting[telp]' class='form-control'/>
+																	</div>
+																	<div class='col-md-6'>
+																		<label>Fax</label>
+																		<input type='text' name='fax' value='$setting[fax]' class='form-control'/>
+																	</div>
+																</div>
+															</div>
+															<div class='form-group'>
+																<div class='row'>
+																	<div class='col-md-6'>
+																		<label>Website</label>
+																		<input type='text' name='web' value='$setting[web]' class='form-control'/>
+																	</div>
+																	<div class='col-md-6'>
+																		<label>E-mail</label>
+																		<input type='text' name='email' value='$setting[email]' class='form-control'/>
+																	</div>
+																</div>
+															</div>
+													<!-- LAPORAN -->
+															<div class='form-group'>
+																<label>Header Laporan</label>
+																<textarea name='header' class='form-control' rows='3'>$setting[header]</textarea>
+															</div>	
+															<div class='box-tools pull-right btn-group'>
+																<button type='submit' name='submit1' class='btn btn-sm btn-primary'><i class='fa fa-check'></i> Simpan</button>
+															</div>
+														</div>																		
+												</div><!-- /.box -->
+												
+											<!-- TAB1 -->
+											<div class='tab-pane' id='tab_b'>	
+													<div class='box-tools pull-right btn-group'>
+														<button type='submit' name='submit1' class='btn btn-sm btn-primary'><i class='fa fa-check'></i> Simpan</button>
+													</div>	
+													<div class='row'>
+													<div class='col-md-6'>
+													   <div class='box box-solid'>
+														  <div class='box-body'>
+															 <div class='col-md-6'>																		
+																<img class='img img-responsive' src='$homeurl/$setting[logo_header]' height='100'/>
+															 </div>
+															 <div class='col-md-12'>
+																<label>Logo Header</label>
+																<input type='file' name='logo_header' class='form-control'/>
+															 </div>
+														  </div>
+														  <!-- /.box-body -->
+													   </div>
+													   <!-- /.box -->
+													</div>
+													<div class='col-md-6'>
+													   <div class='box box-solid'>
+														  <div class='box-body'>
+															 <div class='col-md-6'>
+																<img class='img img-responsive' src='$homeurl/$setting[logo]'height='100'/>
+															 </div>
+															 <div class='col-md-12'>
+																<label>Logo Sekolah / Kanan</label>
+																<input type='file' name='logo' class='form-control'/>
+															 </div>
+														  </div>
+														  <!-- /.box-body -->
+													   </div>
+													   <!-- /.box -->
+													</div>
+													</div>
+													<div class='row'>
+													<div class='col-md-6'>
+													   <div class='box box-solid'>
+														  <div class='box-body'>
+															 <div class='col-md-6'>
+																<img class='img img-responsive' src='$homeurl/$setting[logo_instansi]'height='100'/>
+															 </div>
+															 <div class='col-md-12'>
+																<label>Logo Instansi / Kiri</label>
+																<input type='file' name='logo_instansi' class='form-control'/>
+															 </div>
+														  </div>
+														  <!-- /.box-body -->
+													   </div>
+													   <!-- /.box -->
+													</div>
+													<div class='col-md-6'>
+													   <div class='box box-solid'>
+														  <div class='box-body'>
+															 <div class='col-md-6'>
+																<img class='img img-responsive' src='$homeurl/$setting[logo_stempel]'height='100'/>
+															 </div>
+															 <div class='col-md-12'>
 																<label>Stempel & Tanda Tangan</label>
 																<input type='file' name='logo_stempel' class='form-control'/>
-															</div>															
-														</div>
+															 </div>
+														  </div>
+														  <!-- /.box-body -->
+													   </div>
+													   <!-- /.box -->
 													</div>
-												</div>
-											</div>
-										</div>											
-
-<!-- BACKGOUND ADMIN -->				<div class='panel box box-danger'>
-											<a href=''>
-												<div class='box-header with-border' data-toggle='collapse' data-parent='#accordion' href='#collapseE' aria-expanded='false' class='collapsed'>
-													<h4 class='box-title'>
-														<img src='../dist/img/svg/add_image.svg' width='30'> Background Admin
-													</h4>
-												</div>
-											</a>
-												<div id='collapseE' class='panel-collapse collapse' aria-expanded='false' style='height: 0px;'>
-													<div class='box-body'>											
-														<div class='form-group'>
-															<div class='row'>														
-																<div class='col-md-6'>
-																	<img class='img img-responsive' src='$homeurl/$setting[background_admin]' height='100'/>
-																</div>
-																<div class='col-md-12'>
-																	<label>Background Admin</label>
-																	<input type='file' name='background_admin' class='form-control'/>
-																</div>
-															</div>
-														</div>
 													</div>
-												</div>
-											</div>	
-
-<!-- BACKGOUND SISWA -->				<div class='panel box box-danger'>
-											<a href=''>
-												<div class='box-header with-border' data-toggle='collapse' data-parent='#accordion' href='#collapseF' aria-expanded='false' class='collapsed'>
-													<h4 class='box-title'>
-														<img src='../dist/img/svg/add_image.svg' width='30'> Background Siswa
-													</h4>
-												</div>
-											</a>
-												<div id='collapseF' class='panel-collapse collapse' aria-expanded='false' style='height: 0px;'>
-													<div class='form-group'>
-														<div class='row'>														
-															<div class='col-md-6'>
+													<div class='row'>
+													<div class='col-md-6'>
+													   <div class='box box-solid'>
+														  <div class='box-body'>
+															 <div class='col-md-6'>
+																<img class='img img-responsive' src='$homeurl/$setting[background_admin]' height='100'/>
+															 </div>
+															 <div class='col-md-12'>
+																<label>Background Admin</label>
+																<input type='file' name='background_admin' class='form-control'/>
+															 </div>
+														  </div>
+														  <!-- /.box-body -->
+													   </div>
+													   <!-- /.box -->
+													</div>
+													<div class='col-md-6'>
+													   <div class='box box-solid'>
+														  <div class='box-body'>
+															 <div class='col-md-6'>
 																<img class='img img-responsive' src='$homeurl/$setting[background_siswa]'height='100'/>
-															</div>
-															<div class='col-md-12'>
+															 </div>
+															 <div class='col-md-12'>
 																<label>Background Siswa</label>
 																<input type='file' name='background_siswa' class='form-control'/>
-															</div>
-														</div>
+															 </div>
+														  </div>
+														  <!-- /.box-body -->
+													   </div>
+													   <!-- /.box -->
 													</div>
-												</div>
-											</div>											
-<!-- END ACCORDION -->					</div>	
-												</div><!-- /.box-body -->
-											</div><!-- /.box -->
-										</form>
-									</div>
-									<div class='col-md-6'>
-										
-										<form action='' method='post'>
-											<div class='box box-danger'>
-												<div class='box-header with-border'>
-													<h3 class='box-title'>Kosongkan Data</h3>													
-												</div><!-- /.box-header -->
-												<div class='box-body'>													
-													<div class='form-group'>														
-														<div class='alert alert-warning'>
-															<i class='fa fa-warning'></i> <strong>Mohon di ingat!</strong> Data yang telah dikosongkan tidak dapat dikembalikan.</p>
-														</div>															
-														$info4
-														<label>Pilih Data yang akan dikosongkan</label>														
-                                                        <div class='row'>
-                                                            <div class='col-md-5'>
-                                                                <div class='checkbox'>
-																<small class='label bg-purple'>Pilih Data Hasil Nilai</small><br/>
-                                                                    <label><input type='checkbox' name='data[]' value='nilai'/> Data Nilai</label><br/>
-																	 <label><input type='checkbox' name='data[]' value='hasil_jawaban'/> Data Jawaban</label><br/>
-																	 <label><input type='checkbox' name='data[]' value='jawaban'/> Temp_Jawaban</label><br/>
-																	 														 
-																	<small class='label label-danger'>Pilih Data Master</small><br/>
-																	  <label><input type='checkbox' name='data[]' value='siswa'/> Data Siswa</label><br/>
-																	 <label><input type='checkbox' name='data[]' value='kelas'/> Data Kelas</label><br/>
-																	<label><input type='checkbox' name='data[]' value='mata_pelajaran'/> Data Mata Pelajaran</label><br/>
-																	<label><input type='checkbox' name='data[]' value='pk'/> Data Jurusan</label><br/>
-																	<label><input type='checkbox' name='data[]' value='level'/> Data Level</label><br/>
-																	<label><input type='checkbox' name='data[]' value='ruang'/> Data Ruangan</label><br/>
-																	<label><input type='checkbox' name='data[]' value='sesi'/> Data Sesi</label><br/>
-                                                                    
-                                                                </div>
-                                                            </div>
-															<div class='col-md-5'>
-                                                                <div class='checkbox'>
-																	<small class='label bg-green'>Pilih Data Bank Soal</small><br/>
-                                                                    <label><input type='checkbox' name='data[]' value='soal'/> Data Soal</label><br/>                                                              
-																	<label><input type='checkbox' name='data[]' value='mapel'/> Data Bank Soal</label><br/>
+													</div>												
+													</form>																		
+												</div><!-- /.box -->
+												
+												<!-- TAB1 -->
+												<div class='tab-pane' id='tab_c'>	
+													<form action='' method='post'>															
+															<div class='box-body'>													
+																<div class='form-group'>														
+																	<div class='alert alert-warning'>
+																		<i class='fa fa-warning'></i> <strong>Mohon di ingat!</strong> Data yang telah dikosongkan tidak dapat dikembalikan.</p>
+																	</div>															
 																	
-																	<small class='label bg-blue'>Pilih Data Pengacak Soal</small><br/>
-                                                                    <label><input type='checkbox' name='data[]' value='pengacak'/> Pengacak Soal</label><br/>                                                              
-																	<label><input type='checkbox' name='data[]' value='pengacakopsi'/> Pengacak Opsi</label><br/>
+																	<label>Pilih Data yang akan dikosongkan</label>														
+																	<div class='row'>
+																		<div class='col-md-5'>
+																			<div class='checkbox'>
+																			<small class='label bg-purple'>Pilih Data Hasil Nilai</small><br/>
+																				<label><input type='checkbox' name='data[]' value='nilai'/> Data Nilai</label><br/>
+																				 <label><input type='checkbox' name='data[]' value='hasil_jawaban'/> Data Jawaban</label><br/>
+																				 <label><input type='checkbox' name='data[]' value='jawaban'/> Temp_Jawaban</label><br/>
+																																		 
+																				<small class='label label-danger'>Pilih Data Master</small><br/>
+																				  <label><input type='checkbox' name='data[]' value='siswa'/> Data Siswa</label><br/>
+																				 <label><input type='checkbox' name='data[]' value='kelas'/> Data Kelas</label><br/>
+																				<label><input type='checkbox' name='data[]' value='mata_pelajaran'/> Data Mata Pelajaran</label><br/>
+																				<label><input type='checkbox' name='data[]' value='pk'/> Data Jurusan</label><br/>
+																				<label><input type='checkbox' name='data[]' value='level'/> Data Level</label><br/>
+																				<label><input type='checkbox' name='data[]' value='ruang'/> Data Ruangan</label><br/>
+																				<label><input type='checkbox' name='data[]' value='sesi'/> Data Sesi</label><br/>
+																				
+																			</div>
+																		</div>
+																		<div class='col-md-5'>
+																			<div class='checkbox'>
+																				<small class='label bg-green'>Pilih Data Bank Soal</small><br/>
+																				<label><input type='checkbox' name='data[]' value='soal'/> Data Soal</label><br/>                                                              
+																				<label><input type='checkbox' name='data[]' value='mapel'/> Data Bank Soal</label><br/>
+																				
+																				<small class='label bg-blue'>Pilih Data Pengacak Soal</small><br/>
+																				<label><input type='checkbox' name='data[]' value='pengacak'/> Pengacak Soal</label><br/>                                                              
+																				<label><input type='checkbox' name='data[]' value='pengacakopsi'/> Pengacak Opsi</label><br/>
+																			</div>
+																		</div>
+																	</div>
 																</div>
-                                                            </div>
-                                                        </div>
-													</div>
-													<div class='form-group'>
-														<label>Password Admin</label>
-														<input type='password' name='password' class='form-control' required='true'/>
-													</div>
-                                                    <div class='box-tools pull-right btn-group'>													
-														<button type='submit' name='submit3' class='btn btn-danger'><i class='fa fa-trash-o'></i> Kosongkan</button>														
-													</div>
-												</div><!-- /.box-body -->
-											</div><!-- /.box -->
-										</form>
-										<div class='box box-danger'>
-												<div class='box-header with-border'>
-													<h3 class='box-title'>Backup Data</h3>
-													
-												</div><!-- /.box-header -->
-												<div class='box-body'>
-													<p>Klik Tombol dibawah ini untuk membackup database </p>
-														<button  id='btnbackup' class='btn btn-success'><i class='fa fa-database'></i> Backup Data</button>
-													
-                                                    
-												</div><!-- /.box-body -->
-											</div><!-- /.box -->
-											<div class='box box-success'>
-												<div class='box-header with-border'>
-													<h3 class='box-title'>Restore Data</h3>
-													
-											</div><!-- /.box-header -->
-												<div class='box-body'>
-												<form method='post' action='' name='postform' enctype='multipart/form-data' >
-													<p>Klik Tombol dibawah ini untuk merestore database </p>
-													<div class='col-md-8'>
-													<input class='form-control' name='datafile' type='file' accept='.sql'/>
-													</div>
-														<button name='restore' class='btn btn-primary' id='mymodal'><i class='fa fa-database'></i> Restore Data</button>
-													
-                                                </form>  
-												</div><!-- /.box-body -->
-											</div><!-- /.box -->
+																<div class='form-group'>
+																	<label>Password Admin</label>
+																	<input type='password' name='password' class='form-control' required='true'/>
+																</div>
+																<div class='box-tools pull-right btn-group'>													
+																	<button type='submit' name='submit3' class='btn btn-danger'><i class='fa fa-trash-o'></i> Kosongkan</button>														
+																</div>
+															</div><!-- /.box-body -->
+														
+													</form>																	
+												</div><!-- /.box -->
+												<!-- TAB1 -->
+												<div class='tab-pane' id='tab_d'>	
+													<div class='box box-danger'>
+														<div class='box-header with-border'>
+															<h3 class='box-title'>Backup Data</h3>
+															
+														</div><!-- /.box-header -->
+														<div class='box-body'>
+															<p>Klik Tombol dibawah ini untuk membackup database </p>
+																<button  id='btnbackup' class='btn btn-success'><i class='fa fa-database'></i> Backup Data</button>
+															
+															
+														</div><!-- /.box-body -->
+													</div><!-- /.box -->
+													<div class='box box-success'>
+														<div class='box-header with-border'>
+															<h3 class='box-title'>Restore Data</h3>
+															
+													</div><!-- /.box-header -->
+														<div class='box-body'>
+														<form method='post' action='' name='postform' enctype='multipart/form-data' >
+															<p>Klik Tombol dibawah ini untuk merestore database </p>
+															<div class='col-md-8'>
+															<input class='form-control' name='datafile' type='file' accept='.sql'/>
+															</div>
+																<button name='restore' class='btn btn-primary' id='mymodal'><i class='fa fa-database'></i> Restore Data</button>															
+														</form>  
+														</div><!-- /.box-body -->
+													</div><!-- /.box -->																	
+												</div><!-- /.box -->
+											</div>																						
+									</div> <!--END TAB PENGATURAN -->
+									
+									
 									</div>
 								</div>
 							";
