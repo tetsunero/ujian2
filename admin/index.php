@@ -3811,7 +3811,7 @@
 																<div class='col-md-6'>
 																<label>Pilih Level</label>
 																<select name='level' class='form-control' required='true'>
-																<option value='semua'>Semua Level</option>
+																<option value='semua'>---</option>
 																";
 																$lev = mysql_query("SELECT * FROM level");
 																while($level = mysql_fetch_array($lev)) {
@@ -3823,7 +3823,7 @@
 																<div class='col-md-6'>
 																<label>Pilih Kelas</label><br>
 																<select name='kelas[]' class='form-control select2' multiple='multiple' style='width:100%' required='true'>
-																<option value='semua'>Semua Kelas</option>
+																<option value='semua'>---</option>
 																";
 																$lev = mysql_query("SELECT * FROM kelas  ");
 																while($kelas = mysql_fetch_array($lev)) {
@@ -3961,7 +3961,7 @@
 																<label>Level Soal</label>
 																<select name='level' id='soallevel' class='form-control' required='true'>
 																<option value=''></option>
-																<option value='semua'>Semua</option>
+																<!--<option value='semua'>Semua</option>-->
 																";
 																$lev = mysql_query("SELECT * FROM level");
 																while($level = mysql_fetch_array($lev)) {
@@ -6482,5 +6482,3 @@ echo "
 				
 			</body>
 		</html>
-	
-
