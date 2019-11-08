@@ -4806,23 +4806,15 @@
 								  <div class='nav-tabs-custom'>
 									<ul class='nav nav-tabs'>
 									  <li class='active'><a href='#tab_1' data-toggle='tab' aria-expanded='true'>Import Soal MS-Word</a></li>
-									  <li class=''><a href='#tab_2' data-toggle='tab' aria-expanded='false'>Import Soal MS-Excel</a></li>								  
-									  <li class='pull-right'><a href='#' class='text-muted'><i class='fa fa-gear'></i></a></li>
+									  <li class=''><a href='#tab_2' data-toggle='tab' aria-expanded='false'>Import Soal MS-Excel</a></li>
+									  <li class='pull-right'><a href='?pg=$pg' class='btn btn-sg' title='Batal'><i class='fa fa-times'></i></a></li>
 									</ul>
 									<div class='tab-content'>
 									<!-- TAB1 -->
 									  <div class='tab-pane active' id='tab_1'>				
 											<div class='box box-solid'>
 											<form action='$homeurl/admin/pages/word_import/import/index.php/word_import' method='post' enctype='multipart/form-data'>
-													<div class='box-header with-border bg-blue'>
-														<h3 class='box-title'>Import Soal Ms Word</h3>
-														<div class='box-tools pull-right btn-group'>
-															<button type='submit' name='submit' class='btn btn-sm btn-success'><i class='fa fa-check'></i> Import</button>														
-															<a href='?pg=$pg' class='btn btn-sm btn-danger' title='Batal'><i class='fa fa-times'></i></a>
-														</div>
-													</div><!-- /.box-header -->
 													<div class='box-body'>
-													
 															$info
 															<div class='form-group'>
 																<label>Mata Pelajaran</label>
@@ -4847,18 +4839,23 @@
 														<div class='form-group'>
 															<label>Pilih File</label>
 															<input type='file' accept='.docx' name='word_file' class='form-control' required='true'/>
+															
+															
+															
 														</div>
 														<p>
 															Sebelum meng-import pastikan file yang akan anda import sudah dalam bentuk Ms. Word (.docx) dan format penulisan harus sesuai dengan yang telah ditentukan. <br/>
 														</p>
 													</div><!-- /.box-body -->
-													</form>
-													<div class='box-footer'>														
+													
+													<div class='box-footer'>
+														<button type='submit' name='submit' class='btn btn-primary pull-left'><i class='fa fa-check'></i> Import</button>	
 														<a href='$homeurl/admin/pages/word_import/import/sample/sample.docx'>
-															<button class='btn btn-sm btn-success'><i class='fa fa-file-word-o'></i> Download Contoh Format Template MS-Word</button>
+															<button class='btn btn-sm btn-danger pull-right'><i class='fa fa-file-word-o'></i> Download Contoh Format Template MS-Word</button>
 														</a>
 													</div>
-												</div><!-- /.box -->
+											</form>
+											</div><!-- /.box -->
 																					
 									  </div>
 									<!-- TAB2 -->
@@ -4866,13 +4863,6 @@
 											
 												<div class='box box-solid'>
 												<form action='' method='post' enctype='multipart/form-data'>
-													<div class='box-header  bg-green with-border'>
-														<h3 class='box-title'>Import Soal Excel</h3>
-														<div class='box-tools pull-right btn-group'>
-															<button type='submit' name='submit' class='btn btn-sm btn-primary'><i class='fa fa-check'></i> Import</button>
-															<a href='?pg=$pg' class='btn btn-sm btn-danger' title='Batal'><i class='fa fa-times'></i></a>
-														</div>
-													</div><!-- /.box-header -->
 													<div class='box-body'>												
 															$info
 															<div class='form-group'>
@@ -4888,14 +4878,16 @@
 															Sebelum meng-import pastikan file yang akan anda import sudah dalam bentuk Ms. Excel 97-2003 Workbook (.xls) dan format penulisan harus sesuai dengan yang telah ditentukan. <br/>
 														</p>
 													</div><!-- /.box-body -->
-													</form>
+													
 													<div class='box-footer'>
+													<button type='submit' name='submit' class='btn btn-primary pull-left'><i class='fa fa-check'></i> Import</button>
 														<a href='importdatasoal.xls'>
-															<button class='btn btn-sm btn-success'>																
+															<button class='btn btn-sm btn-success pull-right'>																
 																<i class='fa fa-file-excel-o'></i> Download Contoh Format Template MS-Excel																
 															</button>
 														</a>
 													</div>
+													</form>
 												</div><!-- /.box -->
 																					
 										
@@ -6482,3 +6474,5 @@ echo "
 				
 			</body>
 		</html>
+	
+
