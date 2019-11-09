@@ -6449,13 +6449,13 @@ echo "
 $(document).ready(function () {
 	$(document).on('click', '#pup', function(){
 		swal({
-		  title: 'Are you sure?',
-		  text: 'Some text.',
+		  title: 'Download update?',
+		  text: 'Klik tombol dibawah ini untuk mendownload update aplikasi.',
 		  type: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#DD6B55',
-		  confirmButtonText: 'Yes!',
-		  cancelButtonText: 'No.'
+		  confirmButtonText: 'Oyi',
+		  cancelButtonText: 'Tidak.'
 		}).then((result) => {
 		  if (result.value) {
 			// handle Confirm button click		
@@ -6477,9 +6477,9 @@ $(document).ready(function () {
 										swal({
 										  position: 'top-end',
 										  type: 'success',
-										  title: 'Aplikasi Berhasil diupdate',
+										  title: 'Aplikasi Berhasil diupdate, jangan lupa install update',
 										  showConfirmButton: false,
-										  timer: 1500
+										  timer: 2000
 										});										
 									}
 								});			
