@@ -6500,8 +6500,8 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$(document).on('click', '#stall', function(){
 		swal({
-		  title: 'Download update?',
-		  text: 'Klik tombol dibawah ini untuk mendownload update aplikasi.',
+		  title: 'Install update?',
+		  text: 'Klik tombol dibawah ini untuk install update aplikasi.',
 		  type: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#DD6B55',
@@ -6516,7 +6516,7 @@ $(document).ready(function () {
 									
 									beforeSend: function() {
 										swal({											
-											  text: 'Proses download update',
+											  text: 'Proses install update',
 											  timer: 2000,
 											  onOpen: () => {
 												swal.showLoading()
@@ -6528,7 +6528,7 @@ $(document).ready(function () {
 										swal({
 										  position: 'top-end',
 										  type: 'success',
-										  title: 'Aplikasi Berhasil diupdate, jangan lupa install update',
+										  title: 'Aplikasi Berhasil diupdate',
 										  showConfirmButton: false,
 										  timer: 2000										  
 										})										
