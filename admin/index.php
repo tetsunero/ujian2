@@ -5343,7 +5343,7 @@
 								exec($command, $result);
 								foreach ($result as $line) {
 									
-									echo "
+									echo "									
 			<script src='../plugins/jQuery/jquery-3.1.1.min.js'></script>
 			<script src='../dist/bootstrap/js/bootstrap.min.js'></script>
 			<script >$(document).ready(function () {
@@ -5434,11 +5434,12 @@ echo "
 														<button name='sync' class='btn btn-primary'><i class='fa fa-download'></i> Sinkron Data</button>
 														<button name='sync2' class='btn btn-primary' id='mymodal'><i class='fa fa-database'></i> Install Data</button>		
 														<button name='sync3' class='btn btn-success'><i class='fa fa-download'></i> Update Aplikasi</button>	
-														<button name='sync4' class='btn btn-success'><i class='fa fa-database'></i> Install Update Aplikasi</button>														
+														<button name='sync4' class='btn btn-success'><i class='fa fa-database'></i> Install Update Aplikasi</button>
 												</div><!-- /.box-body -->
 											</div><!-- /.box -->
 										</div>
 										</form>
+										<button name='sync5' class='btn btn-success' id='pup'><i class='fa fa-download'></i> Update Aplikasi</button>	
 									</div>
 								</div><!-- end row update -->
 								$info1
@@ -6444,7 +6445,67 @@ echo "
 					});
 				});
 				</script>
-				
+				<script>
+$(document).ready(function () {
+	$(document).on('click', '#pup', function(){
+		swal({
+		  title: 'Are you sure?',
+		  text: 'Some text.',
+		  type: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#DD6B55',
+		  confirmButtonText: 'Yes!',
+		  cancelButtonText: 'No.'
+		}).then((result) => {
+		  if (result.value) {
+			// handle Confirm button click		
+								$.ajax({
+									type:'POST',
+									url:'sin.php',
+									
+									beforeSend: function() {
+										swal({											
+											  text: 'Proses download update',
+											  timer: 2000,
+											  onOpen: () => {
+												swal.showLoading()
+											  }
+										});
+									},
+									success:function(response) {										
+										$.ajax({
+											type:'POST',
+											url:'stall.php',
+											beforeSend: function() {
+												swal({											
+													  text: 'Proses install update',
+													  timer: 2000,
+													  onOpen: () => {
+														swal.showLoading()
+													  }
+												});
+											},
+											success:function(response) {
+											$(this).attr('disabled','disabled');
+												swal({
+												  position: 'top-end',
+												  type: 'success',
+												  title: 'Aplikasi Berhasil diupdate',
+												  showConfirmButton: false,
+												  timer: 1500
+												});
+											}
+											
+										});									
+									}									
+								});			
+		} else {
+			// result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+		}
+		});
+	});
+});
+</script>
 				
 			</body>
 		</html>
