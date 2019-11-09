@@ -6472,32 +6472,16 @@ $(document).ready(function () {
 											  }
 										});
 									},
-									success:function(response) {										
-										$.ajax({
-											type:'POST',
-											url:'stall.php',
-											beforeSend: function() {
-												swal({											
-													  text: 'Proses install update',
-													  timer: 2000,
-													  onOpen: () => {
-														swal.showLoading()
-													  }
-												});
-											},
-											success:function(response) {
-											$(this).attr('disabled','disabled');
-												swal({
-												  position: 'top-end',
-												  type: 'success',
-												  title: 'Aplikasi Berhasil diupdate',
-												  showConfirmButton: false,
-												  timer: 1500
-												});
-											}
-											
-										});									
-									}									
+									success:function(response) {
+										$(this).attr('disabled','disabled');
+										swal({
+										  position: 'top-end',
+										  type: 'success',
+										  title: 'Aplikasi Berhasil diupdate',
+										  showConfirmButton: false,
+										  timer: 1500
+										});										
+									}
 								});			
 		} else {
 			// result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
