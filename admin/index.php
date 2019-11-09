@@ -5426,20 +5426,25 @@ echo "
 								
 								<div class='col-md-12 notif'>$pesane</div>
 									<div class='col-md-12'>
-										<form action='' method='post' enctype='multipart/form-data'>
+										
 											<div class='box box-primary'>
 												<div class='box-header with-border'>
 													<div class='box-body'>												
-														<p>Klik Tombol dibawah ini untuk sinkronasi atau update aplikasi, jangan lupa install setelah berhasil download <label class='label label-success'>Jika menggunakan tombol di bawah ini, pastikan komputer Anda terhubung dengan internet</label></p>													
+														<p>Klik Tombol dibawah ini untuk sinkronasi atau update aplikasi, jangan lupa install setelah berhasil download <label class='label label-success'>Jika menggunakan tombol di bawah ini, pastikan komputer Anda terhubung dengan internet</label></p>
+													<form class='col-md-6' action='' method='post' enctype='multipart/form-data'>														
 														<button name='sync' class='btn btn-primary'><i class='fa fa-download'></i> Sinkron Data</button>
-														<button name='sync2' class='btn btn-primary' id='mymodal'><i class='fa fa-database'></i> Install Data</button>		
-														<button name='sync3' class='btn btn-success'><i class='fa fa-download'></i> Update Aplikasi</button>	
+														<button name='sync2' class='btn btn-primary' id='mymodal'><i class='fa fa-database'></i> Install Data</button>
+													</form>	
+													<div class='col-md-6'>
+														<!--<button name='sync3' class='btn btn-success'><i class='fa fa-download'></i> Update Aplikasi</button>-->
+														<button name='sync5' class='btn btn-success' id='pup'><i class='fa fa-download'></i> Update Aplikasi</button>
 														<button name='sync4' class='btn btn-success'><i class='fa fa-database'></i> Install Update Aplikasi</button>
+													</div>
 												</div><!-- /.box-body -->
 											</div><!-- /.box -->
 										</div>
-										</form>
-										<button name='sync5' class='btn btn-success' id='pup'><i class='fa fa-download'></i> Update Aplikasi</button>	
+										
+											
 									</div>
 								</div><!-- end row update -->
 								$info1
