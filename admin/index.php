@@ -5434,11 +5434,12 @@ echo "
 													<form class='col-md-6' action='' method='post' enctype='multipart/form-data'>														
 														<button name='sync' class='btn btn-primary'><i class='fa fa-download'></i> Sinkron Data</button>
 														<button name='sync2' class='btn btn-primary' id='mymodal'><i class='fa fa-database'></i> Install Data</button>
+													<!--<button name='sync3' class='btn btn-success'><i class='fa fa-download'></i> Update Aplikasi</button>
+														<button name='sync4' class='btn btn-success' id='stall'><i class='fa fa-database'></i> Install Update Aplikasi</button>-->
 													</form>	
-													<div class='col-md-6'>
-														<!--<button name='sync3' class='btn btn-success'><i class='fa fa-download'></i> Update Aplikasi</button>-->
-														<button name='sync5' class='btn btn-success' id='pup'><i class='fa fa-download'></i> Update Aplikasi</button>
-														<button name='sync4' class='btn btn-success'><i class='fa fa-database'></i> Install Update Aplikasi</button>
+													<div class='col-md-6'>														
+														<button name='sync5' class='btn btn-success' id='sin'><i class='fa fa-download'></i> Update Aplikasi</button>
+														<button name='sync4' class='btn btn-success' id='stall'><i class='fa fa-database'></i> Install Update Aplikasi</button>
 													</div>
 												</div><!-- /.box-body -->
 											</div><!-- /.box -->
@@ -6450,9 +6451,9 @@ echo "
 					});
 				});
 				</script>
-				<script>
+<script>
 $(document).ready(function () {
-	$(document).on('click', '#pup', function(){
+	$(document).on('click', '#sin', function(){
 		swal({
 		  title: 'Download update?',
 		  text: 'Klik tombol dibawah ini untuk mendownload update aplikasi.',
@@ -6488,6 +6489,51 @@ $(document).ready(function () {
 										});										
 									}
 								});			
+		} else {
+			// result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+		}
+		});
+	});
+});
+</script>
+<script>
+$(document).ready(function () {
+	$(document).on('click', '#stall', function(){
+		swal({
+		  title: 'Download update?',
+		  text: 'Klik tombol dibawah ini untuk mendownload update aplikasi.',
+		  type: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#DD6B55',
+		  confirmButtonText: 'Oyi',
+		  cancelButtonText: 'Tidak.'
+		}).then((result) => {
+		  if (result.value) {
+			// handle Confirm button click		
+								$.ajax({
+									type:'POST',
+									url:'stall.php',
+									
+									beforeSend: function() {
+										swal({											
+											  text: 'Proses download update',
+											  timer: 2000,
+											  onOpen: () => {
+												swal.showLoading()
+											  }
+										});
+									},
+									success:function(response) {
+										$(this).attr('disabled','disabled');
+										swal({
+										  position: 'top-end',
+										  type: 'success',
+										  title: 'Aplikasi Berhasil diupdate, jangan lupa install update',
+										  showConfirmButton: false,
+										  timer: 2000										  
+										})										
+									}
+								});									
 		} else {
 			// result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
 		}
