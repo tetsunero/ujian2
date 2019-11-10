@@ -6454,45 +6454,65 @@ echo "
 <script>
 $(document).ready(function () {
 	$(document).on('click', '#sin', function(){
-		swal({
-		  title: 'Download update?',
-		  text: 'Klik tombol dibawah ini untuk mendownload update aplikasi.',
-		  type: 'warning',
-		  showCancelButton: true,
-		  confirmButtonColor: '#DD6B55',
-		  confirmButtonText: 'Oyi',
-		  cancelButtonText: 'Tidak.'
-		}).then((result) => {
-		  if (result.value) {
-			// handle Confirm button click		
-								$.ajax({
-									type:'POST',
-									url:'sin.php',
-									
-									beforeSend: function() {
-										swal({											
-											  text: 'Proses download update',
-											  timer: 2000,
-											  onOpen: () => {
-												swal.showLoading()
-											  }
-										});
-									},
-									success:function(response) {
-										$(this).attr('disabled','disabled');
-										swal({
-										  position: 'top-end',
-										  type: 'success',
-										  title: 'Aplikasi Berhasil diupdate, jangan lupa install update',
-										  showConfirmButton: false,
-										  timer: 2000
-										});										
-									}
-								});			
-		} else {
-			// result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
-		}
+		$.ajax({
+			type:'GET',
+			url:'www.google.com',			
+			timeout: 1000,
+			success:function(response) {
+				swal({
+				  title: 'Download update?',
+				  text: 'Klik tombol dibawah ini untuk mendownload update aplikasi.',
+				  type: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#DD6B55',
+				  confirmButtonText: 'Oyi',
+				  cancelButtonText: 'Tidak.'
+				}).then((result) => {
+					  if (result.value) {
+						// handle Confirm button click		
+											$.ajax({
+												type:'POST',
+												url:'sin.php',
+												
+												beforeSend: function() {
+													swal({											
+														  text: 'Proses download update',
+														  onOpen: () => {
+															swal.showLoading()
+														  }
+													});
+												},
+												success:function(response) {
+													$(this).attr('disabled','disabled');
+													swal({
+													  position: 'top-end',
+													  type: 'success',
+													  title: 'Aplikasi Berhasil diupdate, jangan lupa install update',
+													  showConfirmButton: false,
+													  timer: 2000
+													});										
+												},
+												error: function (xhr, ajaxOptions, thrownError) {
+													swal("Error deleting!", "Please try again", "error");
+													}
+											});			
+					} else {
+						// result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+					}
+				});	
+			},
+			error: function (XMLHttpRequest, textStatus, errorThrown) {
+				swal({
+				  title: 'Perhatian!',
+				  text: 'VHD Server tidak terhubung dengan internet.',
+				  type: 'warning',
+				  showCancelButton: false,
+				  confirmButtonColor: '#DD6B55',
+				  confirmButtonText: 'Oyi',				  
+				})
+			}
 		});
+				
 	});
 });
 </script>
@@ -6544,5 +6564,3 @@ $(document).ready(function () {
 				
 			</body>
 		</html>
-	
-
