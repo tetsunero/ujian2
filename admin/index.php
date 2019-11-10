@@ -6537,7 +6537,6 @@ $(document).ready(function () {
 									beforeSend: function() {
 										swal({											
 											  text: 'Proses install update',
-											  timer: 2000,
 											  onOpen: () => {
 												swal.showLoading()
 											  }
