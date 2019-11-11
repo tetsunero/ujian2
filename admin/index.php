@@ -4895,13 +4895,14 @@
 													
 													<div class='box-footer'>
 													<button type='submit' name='submit' class='btn btn-primary pull-left'><i class='fa fa-check'></i> Import</button>
-														<a href='importdatasoal.xls'>
+														
+													</div>
+													</form>
+													<a href='importdatasoal.xls'>
 															<button class='btn btn-sm btn-success pull-right'>																
 																<i class='fa fa-file-excel-o'></i> Download Contoh Format Template MS-Excel																
 															</button>
 														</a>
-													</div>
-													</form>
 												</div><!-- /.box -->
 																					
 										
