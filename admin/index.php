@@ -4863,11 +4863,12 @@
 													
 													<div class='box-footer'>
 														<button type='submit' name='submit' class='btn btn-primary pull-left'><i class='fa fa-check'></i> Import</button>	
-														<a href='$homeurl/admin/pages/word_import/import/sample/sample.docx'>
-															<button class='btn btn-sm btn-danger pull-right'><i class='fa fa-file-word-o'></i> Download Contoh Format Template MS-Word</button>
+														
 														</a>
 													</div>
 											</form>
+											<a href='$homeurl/admin/pages/word_import/import/sample/sample.docx'>
+															<button class='btn btn-sm btn-danger pull-right'><i class='fa fa-file-word-o'></i> Download Contoh Format Template MS-Word</button>
 											</div><!-- /.box -->
 																					
 									  </div>
