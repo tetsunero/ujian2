@@ -384,7 +384,7 @@
 									
 									<li class=' treeview'>
 										<a href='#'>
-										<img src='../dist/img/svg/folder.svg' width='30'>
+										<img src='../dist/img/svg/genealogy.svg' width='30'>
 										<span>Data Master</span><span class='pull-right-container'> <i class='glyphicon glyphicon-plus pull-right'></i> </span>
             
 										</a>
@@ -414,7 +414,6 @@
 										<li><a href='?pg=reset'><i class='fa  fa-circle-o text-red'></i> <span> Reset Login</span></a></li> 										
 										<li><a href='?pg=token'><i class='fa  fa-circle-o text-red'></i> <span> Rilis Token</span></a></li>
 										<li><a href='?pg=susulan'><i class='fa  fa-circle-o text-red'></i> <span> Belum Ujian</span></a></li>
-										<li><a href='?pg=filemanager'><i class='fa  fa-circle-o text-red'></i> <span> File manager</span></a></li>
 										</ul>
 										</li>
 										<li class='treeview'>
@@ -452,7 +451,11 @@
 										</ul>
 										</li>
 								<!--	<li><a href='?pg=dataserver'><i class='fa  fa-desktop'></i> <span>Server Lokal</span></a></li> -->
-										<li class='treeview'><a href='?pg=pengaturan'><img src='../dist/img/svg/services.svg' width='30'> <span>Pengaturan</span></a></li>
+										<li class='treeview'><a href='?pg=filemanager'><img src='../dist/img/svg/folder.svg' width='30'> <span> File manager</span></a></li>
+										<li class='treeview'><a href='?pg=pengaturan'><img src='../dist/img/svg/services.svg' width='30'> <span>Pengaturan</span></a></li>																						
+										<li class='treeview' ><a href='#' id='tentang'><img src='../dist/img/svg/about.svg' width='30'> <span>Tentang</span></a></li>														
+											
+										
 											
 									";
 								}
@@ -6545,8 +6548,9 @@ $(document).ready(function () {
 				swal({
 				  title: 'Download update?',
 				  text: 'Klik tombol dibawah ini untuk mendownload update aplikasi.',
-				  type: 'warning',
+				  type: 'question',
 				  showCancelButton: true,
+				  allowOutsideClick: false,
 				  confirmButtonColor: '#DD6B55',
 				  confirmButtonText: 'Oyi',
 				  cancelButtonText: 'Tidak.'
@@ -6558,7 +6562,8 @@ $(document).ready(function () {
 												url:'sin.php',
 												
 												beforeSend: function() {
-													swal({											
+													swal({			
+														allowOutsideClick: false,
 														  text: 'Proses download update',
 														  onOpen: () => {
 															swal.showLoading()
@@ -6598,8 +6603,7 @@ $(document).ready(function () {
 				
 	});
 });
-</script>
-<script>
+
 $(document).ready(function () {
 	$(document).on('click', '#stall', function(){
 		swal({
@@ -6618,7 +6622,8 @@ $(document).ready(function () {
 									url:'stall.php',
 									
 									beforeSend: function() {
-										swal({											
+										swal({
+											allowOutsideClick: false,
 											  text: 'Proses install update',
 											  onOpen: () => {
 												swal.showLoading()
@@ -6640,6 +6645,21 @@ $(document).ready(function () {
 			// result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
 		}
 		});
+	});
+});
+
+$(document).ready(function () {
+	$(document).on('click', '#tentang', function(){
+		swal({
+		  title: 'Segera Hadir!',
+		  text: 'Fitur ini dalam tahap penyusunan',
+		  type: 'info',
+		  showCancelButton: false,
+		  confirmButtonColor: '#3085d6',
+		  confirmButtonText: 'Oke',
+		  cancelButtonText: 'Tidak.'
+		  
+		})
 	});
 });
 </script>
