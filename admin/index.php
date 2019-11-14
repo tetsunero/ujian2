@@ -4521,12 +4521,12 @@ jump("?pg=$pg&ac=$ac&id=$id_mapel");
 																<td style='width:30px'>
 																<a href='?pg=$pg&ac=input&id=$id_mapel&no=$soal[nomor]&jenis=1' class='btn btn-sm btn-primary'><i class='fa fa-pencil-square-o'></i></a>
 																<br><br>
-													<!-- MENGHAPUS PERNOMOR SOAL
+													<!-- MENGHAPUS PERNOMOR SOAL PG
 																<a><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#hapus$soal[nomor]'><i class='fa fa-trash'></i></button></a>-->
 																</td>
 																
 													";
-													//** MENGHAPUS PER NOMOR SOAL
+													//** MENGHAPUS PER NOMOR SOAL PG
 													$info = info("Anda yakin akan menghapus soal nomor $soal[nomor]  ?");
 													if(isset($_POST['hapus_perSoal'])) {
 													$exec = mysql_query("DELETE  FROM soal WHERE id_soal = '$_REQUEST[idu]'");
@@ -4580,7 +4580,50 @@ jump("?pg=$pg&ac=$ac&id=$id_mapel");
 														echo "
 															<tr>
 																<td style='width:30px'>$soal[nomor]</td>
-																<td>$soal[soal]";
+																<td>";
+																if($soal['file']<>'') {
+																		$audio = array('mp3','wav','ogg','MP3','WAV','OGG');
+																		$image = array('jpg','jpeg','png','gif','bmp','JPG','JPEG','PNG','GIF','BMP');
+																		$ext = explode(".",$soal['file']);
+																		$ext = end($ext);
+																		if(in_array($ext,$image)) {
+																			echo "
+																				
+																				<img src='$homeurl/files/$soal[file]' style='max-width:200px;'/>
+																			";
+																		}
+																		elseif(in_array($ext,$audio)) {
+																			echo "
+																				
+																				<audio controls><source src='$homeurl/files/$soal[file]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
+																			";
+																		} else {
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
+																		}
+																		
+																}
+																if($soal['file1']<>'') {
+																		$audio = array('mp3','wav','ogg','MP3','WAV','OGG');
+																		$image = array('jpg','jpeg','png','gif','bmp','JPG','JPEG','PNG','GIF','BMP');
+																		$ext = explode(".",$soal['file']);
+																		$ext = end($ext);
+																		if(in_array($ext,$image)) {
+																			echo "
+																				
+																				<img src='$homeurl/files/$soal[file]' style='max-width:200px;'/>
+																			";
+																		}
+																		elseif(in_array($ext,$audio)) {
+																			echo "
+																				
+																				<audio controls><source src='$homeurl/files/$soal[file]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
+																			";
+																		} else {
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
+																		}
+																		
+																}
+																echo "$soal[soal]";
 																if(! $soal['pilA']=="")
 																{ 
 																echo "
