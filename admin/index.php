@@ -6542,9 +6542,9 @@ $(document).ready(function () {
 	$(document).on('click', '#sin', function(){
 		$.ajax({
 			type:'GET',
-			url:'www.google.com',			
-			timeout: 1000,
-			success:function(response) {
+			url:'www.stackoverflow.com',			
+			timeout: 15000,
+			success:function(data) {
 				swal({
 				  title: 'Download update?',
 				  text: 'Klik tombol dibawah ini untuk mendownload update aplikasi.',
@@ -6587,17 +6587,36 @@ $(document).ready(function () {
 					} else {
 						// result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
 					}
-				});	
+				});					
 			},
 			error: function (XMLHttpRequest, textStatus, errorThrown) {
-				swal({
-				  title: 'Perhatian!',
-				  text: 'VHD Server tidak terhubung dengan internet.',
-				  type: 'warning',
-				  showCancelButton: false,
-				  confirmButtonColor: '#DD6B55',
-				  confirmButtonText: 'Oyi',				  
-				})
+				if (XMLHttpRequest.readyState == 4) {
+					// HTTP error (can be checked by XMLHttpRequest.status and XMLHttpRequest.statusText)
+					swal({
+						  title: 'Perhatiane!',
+						  text: 'VHD Server tidak terhubung dengan internet.',
+						  type: 'warning',
+						  showCancelButton: false,
+						  confirmButtonColor: '#DD6B55',
+						  confirmButtonText: 'Oyi',				  
+						})
+					
+				}
+				else if (XMLHttpRequest.readyState == 0) {
+					// Network error (i.e. connection refused, access denied due to CORS, etc.)
+					swal({
+						  title: 'Perhatian!',
+						  text: 'VHD Server tidak terhubung dengan internet.',
+						  type: 'warning',
+						  showCancelButton: false,
+						  confirmButtonColor: '#DD6B55',
+						  confirmButtonText: 'Oyi',				  
+						})
+				}
+				else {
+					// something weird is happening
+				}
+				
 			}
 		});
 				
