@@ -82,6 +82,19 @@
     font-size: 30px;
 	color:red;
 }
+
+.scrollTop {
+  position: fixed;
+  right: 1%;
+  bottom: 10px;
+  opacity: 0;
+  transition: all 0.4s ease-in-out 0s;
+}
+
+.scrollTop a {
+  font-size: 18px;
+  color: #fff;
+}
 </style>
 <style type='text/css' media='print'>
     .page
@@ -89,8 +102,7 @@
      -webkit-transform: rotate(-90deg); 
      -moz-transform:rotate(-90deg);
      filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-    }
-	
+    }	
 </style>
 			</head>
 			<body class='hold-transition skin-green sidebar-mini fixed $sidebar'>
@@ -4863,12 +4875,11 @@
 													
 													<div class='box-footer'>
 														<button type='submit' name='submit' class='btn btn-primary pull-left'><i class='fa fa-check'></i> Import</button>	
-														
+														<a href='$homeurl/admin/pages/word_import/import/sample/sample.docx'>
+															<button class='btn btn-sm btn-danger pull-right'><i class='fa fa-file-word-o'></i> Download Contoh Format Template MS-Word</button>
 														</a>
 													</div>
 											</form>
-											<a href='$homeurl/admin/pages/word_import/import/sample/sample.docx'>
-															<button class='btn btn-sm btn-danger pull-right'><i class='fa fa-file-word-o'></i> Download Contoh Format Template MS-Word</button>
 											</div><!-- /.box -->
 																					
 									  </div>
@@ -4895,14 +4906,13 @@
 													
 													<div class='box-footer'>
 													<button type='submit' name='submit' class='btn btn-primary pull-left'><i class='fa fa-check'></i> Import</button>
-														
-													</div>
-													</form>
-													<a href='importdatasoal.xls'>
+														<a href='importdatasoal.xls'>
 															<button class='btn btn-sm btn-success pull-right'>																
 																<i class='fa fa-file-excel-o'></i> Download Contoh Format Template MS-Excel																
 															</button>
 														</a>
+													</div>
+													</form>
 												</div><!-- /.box -->
 																					
 										
@@ -5797,6 +5807,7 @@ echo "
 					</div><!-- /.content-wrapper -->
 				</div><!-- ./wrapper -->
 					<footer class='main-footer hidden-xs'>
+					<button id='stop' class='scrollTop btn btn-sm btn-danger' title='Munggah notok' type='button' >▲</button>
 						<div class='container'>
 							<div class='pull-left hidden-xs'>
 								<strong>
@@ -6562,6 +6573,73 @@ $(document).ready(function () {
 	});
 });
 </script>
-				
+<script> 
+// BY KAREN GRIGORYAN
+
+$(document).ready(function() {
+  /******************************
+      BOTTOM SCROLL TOP BUTTON
+   ******************************/
+
+  // declare variable
+  var scrollTop = $(".scrollTop");
+
+  $(window).scroll(function() {
+    // declare variable
+    var topPos = $(this).scrollTop();
+
+    // if user scrolls down - show scroll to top button
+    if (topPos > 100) {
+      $(scrollTop).css("opacity", "1");
+
+    } else {
+      $(scrollTop).css("opacity", "0");
+    }
+
+  }); // scroll END
+
+  //Click event to scroll to top
+  $(scrollTop).click(function() {
+    $('html, body').animate({
+      scrollTop: 0
+    }, 800);
+    return false;
+
+  }); // click() scroll top EMD
+
+  /*************************************
+    LEFT MENU SMOOTH SCROLL ANIMATION
+   *************************************/
+  // declare variable
+  var h1 = $("#h1").position();
+  var h2 = $("#h2").position();
+  var h3 = $("#h3").position();
+
+  $('.link1').click(function() {
+    $('html, body').animate({
+      scrollTop: h1.top
+    }, 500);
+    return false;
+
+  }); // left menu link2 click() scroll END
+
+  $('.link2').click(function() {
+    $('html, body').animate({
+      scrollTop: h2.top
+    }, 500);
+    return false;
+
+  }); // left menu link2 click() scroll END
+
+  $('.link3').click(function() {
+    $('html, body').animate({
+      scrollTop: h3.top
+    }, 500);
+    return false;
+
+  }); // left menu link3 click() scroll END
+
+}); // ready() END
+</script> 				
 			</body>
 		</html>
