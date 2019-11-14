@@ -83,13 +83,8 @@
 	color:red;
 }
 
-.scrollTop {
-  position: fixed;
-  right: 1%;
-  bottom: 10px;
-  opacity: 0;
-  transition: all 0.4s ease-in-out 0s;
-}
+.scrollTop {position: fixed;right: 1%;bottom: 10px;visibility: hidden;transition: all 0.4s ease-in-out 0s;}
+.kiri {position: fixed;right: 4%;bottom: 10px;visibility: hidden;transition: all 0.4s ease-in-out 0s;}
 
 .scrollTop a {
   font-size: 18px;
@@ -4287,8 +4282,13 @@
 									
 											</div><!-- /.box-header -->
 											<div class='box-body'>
-											<div class='table-responsive'>
-											<b>A. Soal Pilihan Ganda</b>
+											<div class='table-responsive'>										
+<div class='kiri'>
+    <button class='link1 btn btn-sm btn-success' title='Ke Soal Pg' type='button' >Pilgan</button>
+	<button class='link2 btn btn-sm btn-success' title='Ke Soal Esai' type='button' >Esai</button>
+</div>
+
+											<b id='h1'>A. Soal Pilihan Ganda</b>
 												<table  class='table table-bordered table-striped'>
 													
 													<tbody>";
@@ -4318,7 +4318,7 @@
 																				<audio controls><source src='$homeurl/files/$soal[file]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
 																			";
 																		} else {
-																			echo "File tidak didukung!";
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
 																		}
 																		
 																}
@@ -4339,7 +4339,7 @@
 																				<audio controls><source src='$homeurl/files/$soal[file1]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
 																			";
 																		} else {
-																			echo "File tidak didukung!";
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
 																		}
 																} 
 																echo "
@@ -4370,7 +4370,7 @@
 																				<audio controls><source src='$homeurl/files/$soal[fileA]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
 																			";
 																		} else {
-																			echo "File tidak didukung!";
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
 																		}
 																} 
 																echo "																
@@ -4400,7 +4400,7 @@
 																				<audio controls><source src='$homeurl/files/$soal[fileB]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
 																			";
 																		} else {
-																			echo "File tidak didukung!";
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
 																		}
 																} 
 																echo "
@@ -4429,7 +4429,7 @@
 																				<audio controls><source src='$homeurl/files/$soal[fileC]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
 																			";
 																		} else {
-																			echo "File tidak didukung!";
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
 																		}
 																} 
 																echo "
@@ -4460,7 +4460,7 @@
 																				<audio controls><source src='$homeurl/files/$soal[fileD]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
 																			";
 																		} else {
-																			echo "File tidak didukung!";
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
 																		}
 																} 
 																echo "
@@ -4493,7 +4493,7 @@
 																				<audio controls><source src='$homeurl/files/$soal[fileE]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
 																			";
 																		} else {
-																			echo "File tidak didukung!";
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
 																		}
 																} 
 																echo "
@@ -4560,7 +4560,7 @@
 													echo "
 													</tbody>
 												</table>
-												<b>B. Soal Essai</b>
+												<b id='h2'>B. Soal Essai</b>
 												<table  class='table table-bordered table-striped'>
 													
 													<tbody>";
@@ -4871,15 +4871,15 @@
 														<p>
 															Sebelum meng-import pastikan file yang akan anda import sudah dalam bentuk Ms. Word (.docx) dan format penulisan harus sesuai dengan yang telah ditentukan. <br/>
 														</p>
+														<button type='submit' name='submit' class='btn btn-primary pull-left'><i class='fa fa-check'></i> Import</button>	
 													</div><!-- /.box-body -->
 													
-													<div class='box-footer'>
-														<button type='submit' name='submit' class='btn btn-primary pull-left'><i class='fa fa-check'></i> Import</button>	
+													<div class='box-footer'>														
 														<a href='$homeurl/admin/pages/word_import/import/sample/sample.docx'>
 															<button class='btn btn-sm btn-danger pull-right'><i class='fa fa-file-word-o'></i> Download Contoh Format Template MS-Word</button>
 														</a>
 													</div>
-											</form>
+											</form>											
 											</div><!-- /.box -->
 																					
 									  </div>
@@ -4902,17 +4902,17 @@
 														<p>
 															Sebelum meng-import pastikan file yang akan anda import sudah dalam bentuk Ms. Excel 97-2003 Workbook (.xls) dan format penulisan harus sesuai dengan yang telah ditentukan. <br/>
 														</p>
-													</div><!-- /.box-body -->
-													
-													<div class='box-footer'>
+														
 													<button type='submit' name='submit' class='btn btn-primary pull-left'><i class='fa fa-check'></i> Import</button>
-														<a href='importdatasoal.xls'>
-															<button class='btn btn-sm btn-success pull-right'>																
-																<i class='fa fa-file-excel-o'></i> Download Contoh Format Template MS-Excel																
-															</button>
-														</a>
-													</div>
+													</div><!-- /.box-body -->
 													</form>
+													<div class='box-footer'>
+														<a href='importdatasoal.xls'>
+															<button class='btn btn-sm btn-success pull-right'>									
+																<i class='fa fa-file-excel-o'></i> Download Contoh Format Template MS-Excel																
+															</button></a>														
+													</div>													
+													
 												</div><!-- /.box -->
 																					
 										
@@ -6582,18 +6582,24 @@ $(document).ready(function() {
    ******************************/
 
   // declare variable
-  var scrollTop = $(".scrollTop");
-
-  $(window).scroll(function() {
+	var scrollTop = $(".scrollTop");
+	var kiri = $(".kiri");
+	
+$(window).scroll(function() {
     // declare variable
     var topPos = $(this).scrollTop();
+	var topPos2 = $(this).scrollTop();
 
     // if user scrolls down - show scroll to top button
     if (topPos > 100) {
-      $(scrollTop).css("opacity", "1");
-
+		$(scrollTop).css("visibility", "visible");
     } else {
-      $(scrollTop).css("opacity", "0");
+		$(scrollTop).css("visibility", "hidden");
+    }
+	if (topPos2 > 100) {
+		$(kiri).css("visibility", "visible");
+    } else {
+		$(kiri).css("visibility", "hidden");
     }
 
   }); // scroll END
@@ -6614,7 +6620,7 @@ $(document).ready(function() {
   var h1 = $("#h1").position();
   var h2 = $("#h2").position();
   var h3 = $("#h3").position();
-
+  
   $('.link1').click(function() {
     $('html, body').animate({
       scrollTop: h1.top
