@@ -138,7 +138,7 @@
 																				<audio controls><source src='$homeurl/files/$sp[file]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
 																			";
 																		} else {
-																			echo "File tidak didukung!";
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
 																		}
 																		
 																}
@@ -159,7 +159,7 @@
 																				<audio controls><source src='$homeurl/files/$sp[file1]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
 																			";
 																		} else {
-																			echo "File tidak didukung!";
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
 																		}
 																} 
 																echo "
@@ -193,7 +193,7 @@
 																				<audio controls><source src='$homeurl/files/$sp[fileA]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
 																			";
 																		} else {
-																			echo "File tidak didukung!";
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
 																		}
 																		
 																}
@@ -223,7 +223,7 @@
 																				<audio controls><source src='$homeurl/files/$sp[fileB]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
 																			";
 																		} else {
-																			echo "File tidak didukung!";
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
 																		}
 																		
 																}
@@ -254,7 +254,7 @@
 																				<audio controls><source src='$homeurl/files/$sp[fileC]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
 																			";
 																		} else {
-																			echo "File tidak didukung!";
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
 																		}
 																		
 																}
@@ -287,7 +287,7 @@
 																				<audio controls><source src='$homeurl/files/$sp[fileD]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
 																			";
 																		} else {
-																			echo "File tidak didukung!";
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
 																		}
 																		
 																}
@@ -321,7 +321,7 @@
 																				<audio controls><source src='$homeurl/files/$sp[fileE]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
 																			";
 																		} else {
-																			echo "File tidak didukung!";
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
 																		}
 																		
 																}
@@ -356,7 +356,49 @@
 					<table width=100% border=0>
 					<tr>
 					<td width=30px valign=top><p>$nomer</p></td>
-					<td valign=top><p>$soalnye</td>						
+					<td valign=top>";
+					if($sp['file']<>'') {
+																		$audio = array('mp3','wav','ogg','MP3','WAV','OGG');
+																		$image = array('jpg','jpeg','png','gif','bmp','JPG','JPEG','PNG','GIF','BMP');
+																		$ext = explode(".",$sp['file']);
+																		$ext = end($ext);
+																		if(in_array($ext,$image)) {
+																			echo "
+																				
+																				<img src='$homeurl/files/$sp[file]' style='max-width:350px;'/>
+																			";
+																		}
+																		elseif(in_array($ext,$audio)) {
+																			echo "
+																				
+																				<audio controls><source src='$homeurl/files/$sp[file]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
+																			";
+																		} else {
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
+																		}
+																		
+																}
+																if($sp['file1']<>'') {
+																		$audio = array('mp3','wav','ogg','MP3','WAV','OGG');
+																		$image = array('jpg','jpeg','png','gif','bmp','JPG','JPEG','PNG','GIF','BMP');
+																		$ext = explode(".",$sp['file1']);
+																		$ext = end($ext);
+																		if(in_array($ext,$image)) {
+																			echo "
+																				
+																				<img src='$homeurl/files/$sp[file1]' style='max-width:200px;'/>
+																			";
+																		}
+																		elseif(in_array($ext,$audio)) {
+																			echo "
+																				
+																				<audio controls><source src='$homeurl/files/$sp[file1]' type='audio/$ext'>Your browser does not support the audio tag.</audio>
+																			";
+																		} else {
+																			echo "<b class='btn-sm bg-orange'><i class='fa fa-warning'></i> Error File gambar/audio tidak didukung, Silahkan perbaiki template soal!</b><br/><br/>";
+																		}
+																} 
+					echo "<p>$soalnye</td>						
 					</tr>
 					</table>";
 				
