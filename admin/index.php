@@ -4090,6 +4090,8 @@
 								
 								if(isset($_REQUEST['tambah']))
 								{ 
+// MENGHAPUS SOAL KETIKA IMPORT WORD
+$SilentKosongSoal = mysql_query("delete from soal where id_mapel='$_GET[id]'");
 									$sip = $_SERVER['SERVER_NAME'];
 									$smax = mysql_query("select max(qid) as maxi from savsoft_qbank");
 									while ($hmax = mysql_fetch_array($smax)) {
@@ -4219,7 +4221,9 @@
 									}
 									
 									$hasil2 = mysql_query("TRUNCATE TABLE savsoft_qbank");
-									$hasil2 = mysql_query("TRUNCATE TABLE savsoft_options");		
+									$hasil2 = mysql_query("TRUNCATE TABLE savsoft_options");
+// LOMPAT JIKA SUDAH MENGAMBIL DATA DARI SAVASOFT
+jump("?pg=$pg&ac=$ac&id=$id_mapel");									
 									}
 								
 								$namamapel=mysql_fetch_array(mysql_query("select * from mapel where id_mapel='$id_mapel'"));
@@ -4232,12 +4236,14 @@
 												<h3 class='box-title'>Daftar Soal $namamapel[nama]</h3>
 												<div class='box-tools pull-right btn-group'>
 												
-													<a href='?pg=$pg&ac=input&id=$id_mapel&no=1&jenis=1' class='btn btn-sm btn-primary'><i class='fa fa-plus'></i><span class='hidden-xs'> Tambah</span> PG</a>
-													<a href='?pg=$pg&ac=input&id=$id_mapel&no=1&jenis=2' class='btn btn-sm btn-primary $hide'><i class='fa fa-plus'></i><span class='hidden-xs'> Tambah</span> Essai</a>
-													<a class='btn btn-sm btn-primary' href='soal_excel.php?m=$id_mapel'><i class='fa fa-file-excel-o'></i><span class='hidden-xs'> Excel</span></a>
-													<button class='btn btn-sm btn-primary' onclick=frames['frameresult'].print()><i class='fa fa-print'></i><span class='hidden-xs'> Print</span></button>
-													<!-- /.Kode Hapus Soal Per Mapel -->
-													<a><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#hapus$soal[id_mapel]'><i class='fa fa-trash'></i> Kosongkan</button></a>
+													<!-- <a href='?pg=$pg&ac=input&id=$id_mapel&no=1&jenis=1' class='btn btn-sm btn-primary'><i class='fa fa-plus'></i><span class='hidden-xs'> Tambah</span> PG</a>
+													<a href='?pg=$pg&ac=input&id=$id_mapel&no=1&jenis=2' class='btn btn-sm btn-primary $hide'><i class='fa fa-plus'></i><span class='hidden-xs'> Tambah</span> Essai</a> -->
+													
+													<a class='btn btn-sm btn-primary' href='?pg=$pg&ac=importsoal&id=$id_mapel' title='Upload soal $namamapel[nama] dari template soal'><i class='fa fa-upload'></i><span class='hidden-xs'> Upload</span></a>
+													<a class='btn btn-sm btn-primary' href='soal_excel.php?m=$id_mapel' title='Download soal $namamapel[nama] kedalam format excell'><i class='fa fa-download'></i><span class='hidden-xs'> Download</span></a>
+													<button class='btn btn-sm btn-primary' title='Cetak soal $namamapel[nama]' onclick=frames['frameresult'].print()><i class='fa fa-print'></i><span class='hidden-xs'> Print</span></button>
+<!-- /.Kode Hapus Soal Per Mapel -->
+													<a class='btn btn-danger btn-sm' data-toggle='modal' data-target='#hapus$soal[id_mapel]' title='Hapus semua isi soal $namamapel[nama]'><i class='fa fa-trash'></i> Kosongkan</a>												
 													<iframe name='frameresult' src='cetaksoal.php?id=$id_mapel' style='border:none;width:1px;height:1px;'></iframe>
 													
 												</div>
@@ -4245,7 +4251,7 @@
 											</div><!-- /.box-header -->
 											";
 											//kode hapus & alert
-											$info = info("Anda yakin akan menghapus soal ini keseluruhan ?");
+											$info = info("Anda yakin akan menghapus semua isi soal $namamapel[nama] ini?");
 													if(isset($_POST['hapus'])) {
 													$exec = mysql_query("delete from soal where id_mapel='$_GET[id]'");
 													(!$exec) ? info("Gagal menyimpan","NO") : jump("?pg=$pg&ac=lihat&id=$_GET[id]");	
@@ -4515,10 +4521,12 @@
 																<td style='width:30px'>
 																<a href='?pg=$pg&ac=input&id=$id_mapel&no=$soal[nomor]&jenis=1' class='btn btn-sm btn-primary'><i class='fa fa-pencil-square-o'></i></a>
 																<br><br>
-																<a><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#hapus$soal[nomor]'><i class='fa fa-trash'></i></button></a>
+													<!-- MENGHAPUS PERNOMOR SOAL
+																<a><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#hapus$soal[nomor]'><i class='fa fa-trash'></i></button></a>-->
 																</td>
 																
 													";
+													//** MENGHAPUS PER NOMOR SOAL
 													$info = info("Anda yakin akan menghapus soal nomor $soal[nomor]  ?");
 													if(isset($_POST['hapus_perSoal'])) {
 													$exec = mysql_query("DELETE  FROM soal WHERE id_soal = '$_REQUEST[idu]'");
@@ -4607,10 +4615,12 @@
 																<td style='width:30px'>
 																<a href='?pg=$pg&ac=input&id=$id_mapel&no=$soal[nomor]&jenis=2' class='btn btn-sm btn-primary'><i class='fa fa-pencil-square-o'></i></a>
 																<br><br>
-																<a><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#hapus$soal[nomor]'><i class='fa fa-trash-o'></i></button></a>
+													<!-- MENGHAPUS PER NOMOR SOAL ESAI
+																<a><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#hapus$soal[nomor]'><i class='fa fa-trash-o'></i></button></a>-->
 																</td>
 																</tr>
 														";
+													// MENGHAPUS PERNOMOR SOAL ESAI	
 													$info = info("Anda yakin akan menghapus soal nomor $soal[nomor]  ?");
 													if(isset($_POST['hapus_perEsai'])) {
 													$exec = mysql_query("DELETE  FROM soal WHERE id_soal = '$_REQUEST[idu]'");
@@ -4763,7 +4773,7 @@
 									   }
                                     }
                                     $total = $hasildata-1;
-                                    $info = info("Berhasil: $sukses | Gagal: $gagal | Dari: $total",'OK');
+                                    $info = info("Import soal excell Berhasil: $sukses | Gagal: $gagal | Dari: $total",'OK');
 									
                                 }
                             }
