@@ -4252,10 +4252,9 @@ jump("?pg=$pg&ac=$ac&id=$id_mapel");
 											";
 											//kode hapus & alert
 											$info = info("Anda yakin akan menghapus semua isi soal $namamapel[nama] ini?");
-													if(isset($_POST['hapus'])) {
+													if(isset($_POST['hapus'])) {	
 													$exec = mysql_query("delete from soal where id_mapel='$_GET[id]'");
-													(!$exec) ? info("Gagal menyimpan","NO") : jump("?pg=$pg&ac=lihat&id=$_GET[id]");	
-	
+													(!$exec) ? info("Gagal menyimpan","NO") : jump("?pg=$pg&ac=lihat&id=$_GET[id]");
 													}	
 													echo "
 													<div class='modal fade' id='hapus$soal[id]' style='display: none;'>
