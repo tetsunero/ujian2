@@ -785,14 +785,32 @@
 							include 'serverlokal.php';
 						}
 						elseif($pg=='filemanager') {
-							
-														echo "
-							<iframe  width='100%' height='550' frameborder='0'
-								src='ifm.php'>
+							if(isset($_POST['clearFile'])) {
+									$info = info("Anda yakin akan menghapus semua isi soal inie?");
+									$files = glob('../files/*'); // get directory contents
+								foreach ($files as $file) { // iterate files      
+								   // Check if file
+								   if (is_file($file)) {
+									  unlink($file); // delete file
+								   }
+								}													
+							}	
+								echo "
+											<div class='box box-success direct-chat direct-chat-warning'>
+												<div class='box-header with-border bg-green'>
+													<h3 class='box-title'><i class='fa fa-history'></i> Berkas File Pendukung Soal</h3>
+													<div class='box-tools pull-right'>
+														<form action='' method='post'>
+														<button type='submit' name='clearFile' class='btn btn-sm btn-danger' title='Kosongkan Berkas File Pendukung Soal'><i class='fa fa-trash-o'></i> Kosongkan</button>
+														</form>
+													</div>
+												</div><!-- /.box-header -->												
+							<iframe  width='100%' height='550' frameborder='0' src='ifm.php'>
 							</iframe>
+							
 							";
 						}
-						
+												
 						// mata pelajaran
 						elseif($pg=='matapelajaran') {
 							cek_session_admin();
@@ -4251,11 +4269,11 @@ jump("?pg=$pg&ac=$ac&id=$id_mapel");
 											</div><!-- /.box-header -->
 											";
 											//kode hapus & alert
-											$info = info("Anda yakin akan menghapus semua isi soal $namamapel[nama] ini?");
-													if(isset($_POST['hapus'])) {	
+											$info = info("Anda yakin akan menghapus semua isi soal $namamapel[nama] inie?");
+													if(isset($_POST['hapus'])) {
 													$exec = mysql_query("delete from soal where id_mapel='$_GET[id]'");
 													(!$exec) ? info("Gagal menyimpan","NO") : jump("?pg=$pg&ac=lihat&id=$_GET[id]");
-													}	
+													}
 													echo "
 													<div class='modal fade' id='hapus$soal[id]' style='display: none;'>
 													<div class='modal-dialog'>
