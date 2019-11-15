@@ -4221,19 +4221,19 @@ $SilentKosongSoal = mysql_query("delete from soal where id_mapel='$_GET[id]'");
 									$jns="2";
 									}
 									
-									$jwb522 = str_replace("&amp;lt;","<",$jwb521);
-									$jwb422 = str_replace("&amp;lt;","<",$jwb421);
-									$jwb322 = str_replace("&amp;lt;","<",$jwb321);
-									$jwb222 = str_replace("&amp;lt;","<",$jwb221);
-									$jwb122 = str_replace("&amp;lt;","<",$jwb121);
+									$opj12 = str_replace("&amp;lt;","<",$opj1);
+									$opj22 = str_replace("&amp;lt;","<",$opj2);
+									$jwb32 = str_replace("&amp;lt;","<",$opj3);
+									$jwb42 = str_replace("&amp;lt;","<",$opj4);
+									$jwb52 = str_replace("&amp;lt;","<",$opj5);
 									
 									$soal_tanya2 = str_replace("&amp;lt;","<",$soal_tanya);
 							
-									$jwb52 = str_replace("&amp;gt;",">",$jwb522);
-									$jwb42 = str_replace("&amp;gt;",">",$jwb422);
-									$jwb32 = str_replace("&amp;gt;",">",$jwb322);
-									$jwb22 = str_replace("&amp;gt;",">",$jwb222);
-									$jwb12 = str_replace("&amp;gt;",">",$jwb122);
+									$opj1 = str_replace("&amp;gt;",">",$opj12);
+									$opj2 = str_replace("&amp;gt;",">",$opj22);
+									$opj3 = str_replace("&amp;gt;",">",$jwb32);
+									$opj4 = str_replace("&amp;gt;",">",$jwb42);
+									$opj5 = str_replace("&amp;gt;",">",$jwb52);
 									
 									$soal_tanya = str_replace("&amp;gt;",">",$soal_tanya2);
 									$exec = mysql_query("INSERT INTO soal (id_mapel,nomor,soal,pilA,pilB,pilC,pilD,pilE,jawaban,jenis,file,file1,fileA,fileB,fileC,fileD,fileE) VALUES ('$id_mapel','$no','$soal_tanya','$opj1','$opj2','$opj3','$opj4','$opj5','$kunci','$jns','$g_soal','$file2','$fileA','$fileB','$fileC','$fileD','$fileE')");
