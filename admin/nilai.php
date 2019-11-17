@@ -31,11 +31,11 @@ if($ac=='') {
 													if($pengawas['level']=='admin'){
 														$mapelQ = mysql_query("SELECT mapel.*,nilai.* FROM mapel INNER JOIN nilai ON mapel.id_mapel=nilai.id_mapel GROUP BY mapel.id_mapel ASC");
 													}elseif($pengawas['level']=='guru'){
-														$mapelQ = mysql_query("SELECT mapel.*,nilai.* FROM mapel INNER JOIN nilai ON mapel.id_mapel=nilai.id_mapel where mapel.idguru='$pengawas[id_pengawas]' GROUP BY mapel.id_mapel ASC");
+														$mapelQ = mysql_query("SELECT mapel.*,nilai.* FROM mapel INNER JOIN nilai ON mapel.id_mapel=nilai.id_mapel WHERE mapel.idguru='$pengawas[id_pengawas]' GROUP BY mapel.id_mapel ASC");
 													}
 													while($mapel = mysql_fetch_array($mapelQ)) {
-														$cek=mysql_num_rows(mysql_query("select * from nilai where id_mapel='$mapel[id_mapel]' and ujian_selesai='' and id_siswa<>''"));
-														$cek2=mysql_num_rows(mysql_query("select * from jawaban where id_mapel='$mapel[id_mapel]'"));
+														$cek=mysql_num_rows(mysql_query("SELECT * FROM nilai WHERE id_mapel='$mapel[id_mapel]' and ujian_selesai='' and id_siswa<>''"));
+														$cek2=mysql_num_rows(mysql_query("SELECT * FROM jawaban WHERE id_mapel='$mapel[id_mapel]'"));
 														if($cek <> 0 or $cek2 == 0){
 															$dis='disabled';
 														}else{
@@ -62,7 +62,7 @@ if($ac=='') {
 																<option value='semua'>Semua</option>
 																";
 																if($mapel['level']<>'semua'){
-																$kelasQ = mysql_query("SELECT * FROM kelas where level='$mapel[level]'");
+																$kelasQ = mysql_query("SELECT * FROM kelas WHERE level='$mapel[level]'");
 																}else{
 																$kelasQ = mysql_query("SELECT * FROM kelas");
 																}
@@ -473,7 +473,8 @@ if($ac=='') {
 									'ujian_selesai' => $datetime,
 									'jml_benar' => $benar,
 									'jml_salah' => $salah,
-									'skor' => $skor
+									'skor' => $skor,
+									'total' => $skor
 								);
 								update('nilai',$data,$where);
 								
