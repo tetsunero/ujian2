@@ -1,101 +1,94 @@
 <?php 
 if($ac=='') {
-								echo "
-									<div class='row'>
-													
-										
-										<div class='col-md-12'>
-										<div class='alert alert-danger '>
-													<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
-													<i class='icon fa fa-info'></i>
-													Hasil Nilai Ujian akan muncul saat ada ujian berlangsung atau telah selesai
-													<p><b>Tombol Ambil Jawaban</b> akan aktif jika tidak ada ujian berlangsung</p>
-													</div>
+echo "
+	<div class='row'>
+		<div class='col-md-12'>
+			<div class='alert alert-danger '>
+				<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
+				<i class='icon fa fa-info'></i>Hasil Nilai Ujian akan muncul saat ada ujian berlangsung atau telah selesai<p><b>Tombol Ambil Jawaban</b> akan aktif jika tidak ada ujian berlangsung</p>
+			</div>
 											
-												<div class='box box-primary'>
-													<div class='box-header with-border'>
-														<h3 class='box-title'>ANALISIS NILAI & JAWABAN</h3>
-														<div class='box-tools pull-right btn-group'>
+			<div class='box box-primary'>
+				<div class='box-header with-border'>
+					<h3 class='box-title'>ANALISIS NILAI & JAWABAN</h3>
+						<div class='box-tools pull-right btn-group'>
 															
-														</div>
-													</div><!-- /.box-header -->
-													<div class='box-body'>$info
-													<div class='table-responsive'>
-													<table class='table table-striped table-bordered'>
-													<th>#</th>
-													<th>Nama Mapel</th>
-													<th>Pilih Kelas</th>
-													<th>Action</th>
-													";
-														
-													if($pengawas['level']=='admin'){
-														$mapelQ = mysql_query("SELECT mapel.*,nilai.* FROM mapel INNER JOIN nilai ON mapel.id_mapel=nilai.id_mapel GROUP BY mapel.id_mapel ASC");
-													}elseif($pengawas['level']=='guru'){
-														$mapelQ = mysql_query("SELECT mapel.*,nilai.* FROM mapel INNER JOIN nilai ON mapel.id_mapel=nilai.id_mapel WHERE mapel.idguru='$pengawas[id_pengawas]' GROUP BY mapel.id_mapel ASC");
-													}
-													while($mapel = mysql_fetch_array($mapelQ)) {
-														$cek=mysql_num_rows(mysql_query("SELECT * FROM nilai WHERE id_mapel='$mapel[id_mapel]' and ujian_selesai='' and id_siswa<>''"));
-														$cek2=mysql_num_rows(mysql_query("SELECT * FROM jawaban WHERE id_mapel='$mapel[id_mapel]'"));
-														if($cek <> 0 or $cek2 == 0){
-															$dis='disabled';
-														}else{
-															$dis='';
-														}
-														
-														$no++;
-														echo "
-														<tr>
-														<input type='hidden' id='txt$mapel[id_mapel]' value='$mapel[id_mapel]'/>
-														<td>$no </td>
-														<td> <small class='label bg-blue'>$mapel[nama]</small> <small class='label bg-purple'>$mapel[level]</small> ";
-														$dataArray = unserialize($mapel['kelas']);
-																foreach ($dataArray as $key => $value) {
-																	echo "<small class='label label-success'>$value </small>&nbsp;";
-																}
-														echo "
-														</td>
-														<td>
-														<div class='form-group'>
-															
-															<select id='me$mapel[id_mapel]' class='idkel form-control select2' style='width:100%'>
-																<option value=''></option>
-																<option value='semua'>Semua</option>
-																";
-																if($mapel['level']<>'semua'){
-																$kelasQ = mysql_query("SELECT * FROM kelas WHERE level='$mapel[level]'");
-																}else{
-																$kelasQ = mysql_query("SELECT * FROM kelas");
-																}
-																while($kelas = mysql_fetch_array($kelasQ)) {
-																	echo "<option value='$kelas[id_kelas]'>$kelas[id_kelas]</option>";
-																}
-																echo"
-															</select>
-														</div>
-														<td>
-														<a href='#'  id='btnnilai' class='linknilai btn btn-sm btn-primary'><i class='fa fa-eye'></i> Lihat Hasil </a>
-														<button  class='ambiljawaban btn btn-sm btn-danger' data-id='$mapel[id_mapel]' $dis><i class='fa fa-download'></i> Ambil Jawaban </button>
-														</td>
-														</tr>";			
-														
-													}
-													echo " 
-													
-													</table>
-													</div>
-													</div><!-- /.box-body -->
-												</div><!-- /.box -->
-											
-										</div>
-									</div>
-								";
-							} // lihat nilai
-							elseif($ac=='lihat') {
-								
-								$id_mapel = $_GET['idm'];
-								$id_kelas = $_GET['idk'];
-                                $mapel = mysql_fetch_array(mysql_query("SELECT * FROM mapel WHERE id_mapel='$id_mapel'"));
-								echo "
+						</div>
+				</div><!-- /.box-header -->
+				<div class='box-body'>$info
+					<div class='table-responsive'>
+						<table class='table table-striped table-bordered'>
+							<th>#</th>
+							<th>Nama Mapel</th>
+							<th>Pilih Kelas</th>
+							<th>Action</th>
+";														
+								if($pengawas['level']=='admin'){
+									$mapelQ = mysql_query("SELECT mapel.*,nilai.* FROM mapel INNER JOIN nilai ON mapel.id_mapel=nilai.id_mapel GROUP BY mapel.id_mapel ASC");
+									}elseif($pengawas['level']=='guru'){
+									$mapelQ = mysql_query("SELECT mapel.*,nilai.* FROM mapel INNER JOIN nilai ON mapel.id_mapel=nilai.id_mapel WHERE mapel.idguru='$pengawas[id_pengawas]' GROUP BY mapel.id_mapel ASC");
+									}
+								while($mapel = mysql_fetch_array($mapelQ)) {
+									$cek=mysql_num_rows(mysql_query("SELECT * FROM nilai WHERE id_mapel='$mapel[id_mapel]' and ujian_selesai='' and id_siswa<>''"));
+									$cek2=mysql_num_rows(mysql_query("SELECT * FROM jawaban WHERE id_mapel='$mapel[id_mapel]'"));
+										if($cek <> 0 or $cek2 == 0){
+											$dis='disabled';
+										}else{
+											$dis='';
+										}																					
+									$no++;
+echo "
+							<tr>
+								<input type='hidden' id='txt$mapel[id_mapel]' value='$mapel[id_mapel]'/>
+								<td>$no </td>
+								<td> <small class='label bg-blue'>$mapel[nama]</small> <small class='label bg-purple'>$mapel[level]</small> ";
+									$dataArray = unserialize($mapel['kelas']);
+									foreach ($dataArray as $key => $value) {
+										echo "<small class='label label-success'>$value </small>&nbsp;
+";
+										}
+echo "
+								</td>
+								<td>
+									<div class='form-group'>															
+										<select id='me$mapel[id_mapel]' class='idkel form-control select2' style='width:100%'>
+											<option value=''></option>
+											<option value='semua'>Semua</option>
+";
+											if($mapel['level']<>'semua'){
+												$kelasQ = mysql_query("SELECT * FROM kelas WHERE level='$mapel[level]'");
+											}else{
+											$kelasQ = mysql_query("SELECT * FROM kelas");
+											}
+											while($kelas = mysql_fetch_array($kelasQ)) {
+echo "
+												<option value='$kelas[id_kelas]'>$kelas[id_kelas]</option>
+";
+											}
+echo"
+										</select>
+											</div>
+								<td>
+									<a href='#'  id='btnnilai' class='linknilai btn btn-sm btn-primary'><i class='fa fa-eye'></i> Lihat Hasil </a>
+									<button  class='ambiljawaban btn btn-sm btn-danger' data-id='$mapel[id_mapel]' $dis><i class='fa fa-download'></i> Ambil Jawaban </button>
+								</td>
+							</tr>
+";
+							}
+echo " 
+						</table>
+					</div>
+				</div><!-- /.box-body -->
+			</div><!-- /.box -->											
+		</div>
+	</div>
+";
+			} // lihat nilai
+elseif($ac=='lihat') {								
+	$id_mapel = $_GET['idm'];
+	$id_kelas = $_GET['idk'];
+    $mapel = mysql_fetch_array(mysql_query("SELECT * FROM mapel WHERE id_mapel='$id_mapel'"));
+echo "
 									<div class='row'>
 										<div class='col-md-12'>
 											<div class='box box-solid'>
@@ -451,13 +444,14 @@ if($ac=='') {
 								);
 								$benar = $salah = 0;
 								$mapel = fetch('mapel',array('id_mapel'=>$idm));
-								$siswa = fetch('siswa',array('id_siswa'=>$ids));
-								$ceksoal = select('soal',array('id_mapel'=>$idm));
+								$siswa = fetch('siswa',array('id_siswa'=>$ids));								
+								$ceksoal = select('soal',array('id_mapel'=>$idm,'jenis'=>'1'));
 								foreach($ceksoal as $getsoal) {
 									$w = array(
 										'id_siswa' => $ids,
 										'id_mapel' => $idm,
-										'id_soal' => $getsoal['id_soal']
+										'id_soal' => $getsoal['id_soal'],
+										'jenis' => '1'
 									);
 									$cekjwb = rowcount('jawaban',$w);
 									if($cekjwb<>0) {
@@ -467,8 +461,10 @@ if($ac=='') {
 										$salah++;
 									}
 								}
-								$bagi = $mapel['jml_soal']/100;
-								$skor = $benar/$bagi;
+								$bagi = $mapel['tampil_pg']/100;
+								$bobot= $mapel['bobot_pg']/100;
+								$skorx = ($benar/$bagi)*$bobot;
+								$skor= number_format($skorx,2,'.','');
 								$data = array(
 									'ujian_selesai' => $datetime,
 									'jml_benar' => $benar,
@@ -478,7 +474,7 @@ if($ac=='') {
 								);
 								update('nilai',$data,$where);
 								
-										 $exec=mysql_query("delete from jawaban where id_mapel='$id_mapel' and id_siswa='$id_siswa' ");
+										 //$exec=mysql_query("delete from jawaban where id_mapel='$id_mapel' and id_siswa='$id_siswa' ");
 								delete('pengacak',$where);
 								delete('pengacakopsi',$where);
 								jump("?pg=$pg&ac=lihat&idm=$idm&idk=$idk");
