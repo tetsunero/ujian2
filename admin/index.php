@@ -4946,13 +4946,13 @@ jump("?pg=$pg&ac=$ac&id=$id_mapel");
 														</p>
 														<button type='submit' name='submit' class='btn btn-primary pull-left'><i class='fa fa-check'></i> Import</button>	
 													</div><!-- /.box-body -->
-													
+													</form>	
 													<div class='box-footer'>														
 														<a href='$homeurl/admin/pages/word_import/import/sample/sample.docx'>
 															<button class='btn btn-sm btn-danger pull-right'><i class='fa fa-file-word-o'></i> Download Contoh Format Template MS-Word</button>
 														</a>
 													</div>
-											</form>											
+																					
 											</div><!-- /.box -->
 																					
 									  </div>
