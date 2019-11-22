@@ -80,37 +80,37 @@
 									
 									
 						echo"		</td>		
-										<td width='60px' valign='top'>Sekolah</td>
-										<td valign='top'>: ".strtoupper($setting['sekolah'])."</td>
+										<td style='font-size:14px' width='60px' valign='top'>Sekolah</td>
+										<td style='font-size:14px' valign='top'>: ".strtoupper($setting['sekolah'])."</td>
 									</tr>
 									<tr>
-										<td valign='top'>No Peserta</td>
-										<td valign='top'>: $siswa[no_peserta]</td>
+										<td style='font-size:14px' valign='top'>No Peserta</td>
+										<td style='font-size:14px' valign='top'>: $siswa[no_peserta]</td>
 									</tr>
 									<tr>
-										<td valign='top'>Nama</td>
-										<td valign='top'>: $siswa[nama]</td>
+										<td style='font-size:14px' valign='top'>Nama</td>
+										<td style='font-size:14px' valign='top'>: $siswa[nama]</td>
 									</tr>
 									<tr>
-										<td valign='top'>Kelas / Sesi Ujian</td>
-										<td valign='top'>: $kelas[nama] / Sesi $siswa[sesi]</td>
+										<td style='font-size:14px' valign='top'>Kelas / Sesi Ujian</td>
+										<td style='font-size:14px' valign='top'>: $kelas[nama] / Sesi $siswa[sesi]</td>
 									</tr>
 									<tr>
-										<td valign='top'>Ruang</td>
-										<td valign='top'>: $siswa[ruang]</td>
+										<td style='font-size:14px' valign='top'>Ruang</td>
+										<td style='font-size:14px' valign='top'>: $siswa[ruang]</td>
 									</tr>
 									<tr><td width='100px' valign='top' align='center' rowspan='3'>
 									<img src='$tempatip' height='50px'/></td>
-										<td valign='top'>Username</td>
-										<td valign='top'>: $siswa[username]</td>
+										<td style='font-size:14px' valign='top'>Username</td>
+										<td style='font-size:14px' valign='top'>: $siswa[username]</td>
 									</tr>
 									<tr>
-										<td valign='top'>Password</td>
-										<td valign='top'>: $siswa[password]</td>
+										<td style='font-size:14px' valign='top'>Password</td>
+										<td style='font-size:14px' valign='top'>: $siswa[password]</td>
 									</tr>
 									<tr>
-										<td valign='top'></td>
-										<td valign='top' align='center'>
+										<td style='font-size:14px' valign='top'></td>
+										<td style='font-size:14px' valign='top' align='center'>
 										<br>Kepala Sekolah
 										<br>
 										<img src='$homeurl/$setting[logo_stempel]' height='50px'/>
@@ -165,7 +165,7 @@
 									</tr>										
 								</table>
 							</div>";
-							if(($no%8)==0) { echo "<div style='page-break-before:always;'></div>"; }
+							if(($no%6)==0) { echo "<div style='page-break-before:always;'></div>"; }
 							
 							echo "
 						</td>
