@@ -90,15 +90,11 @@
   font-size: 18px;
   color: #fff;
 }
-
-td.upper_line {
-border-top:solid 1px black; 
-}
-
-table.fraction {
-text-align: center; vertical-align: middle;margin-top:0.5em; margin-bottom:0.5em; line-height: 2em; float:left;
-}
+    td.upper_line { border-top:solid 1px black; }
+    table.fraction { text-align: center; vertical-align: middle;
+    margin-top:0.5em; margin-bottom:0.5em; line-height: 2em; float:left;}
 </style>
+
 <style type='text/css' media='print'>
     .page
     {
@@ -5888,7 +5884,7 @@ echo "
 					</div><!-- /.content-wrapper -->
 				</div><!-- ./wrapper -->
 					<footer class='main-footer hidden-xs'>
-					<button id='stop' class='scrollTop btn btn-sm btn-danger' title='Munggah notok' type='button' >▲</button>
+					<button id='stop' class='scrollTop btn btn-sm btn-danger' title='Munggah notok' type='button' ><i class='fa fa-chevron-up'></i></button>
 						<div class='container'>
 							<div class='pull-left hidden-xs'>
 								<strong>
