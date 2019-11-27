@@ -173,7 +173,7 @@ echo "
 																	<td align='center'>$ket</td>
 																	<td >
 																		<div class='btn-group'>";
-																		if($nilai['skor']<>"") {
+																		if($nilai['ujian_selesai']<>"") {
 																		
 																			if($pengawas['level']=='admin'){
 																				echo "<a href='?pg=$pg&ac=ulang&idm=$id_mapel&idk=$id_kelas&ids=$siswa[id_siswa]' class='btn btn-xs btn-danger'><i class='fa fa-refresh'></i> Ulang</a>";
