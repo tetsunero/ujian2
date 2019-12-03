@@ -702,7 +702,7 @@
 											</div><!-- /.box-header -->
 											<div class='box-body'>												
 													<p class='text-center'>
-														<iframe style='width: 100%;height: 470px;'src='$homeurl/sys.php'></iframe>
+														<iframe style='width: 100%;height: 470px;'src='$homeurl/admin/sys.php'></iframe>
 													</p>												
 											</div><!-- /.box-body -->
 										</div><!-- /.box -->
