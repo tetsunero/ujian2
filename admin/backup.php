@@ -5,7 +5,7 @@ require("../config/config.default.php");
 
 	function &backup_tables($host, $user, $pass, $name, $tables = '*'){
   $data = "\n/*---------------------------------------------------------------".
-          "\n  SQL DB BACKUP ".date("d.m.Y H:i")." ".
+          "\n  SQL DB BACKUPs ".date("d.m.Y H:i")." ".
           "\n  HOST: {$host}".
           "\n  DATABASE: {$name}".
           "\n  TABLES: {$tables}".
@@ -59,6 +59,14 @@ require("../config/config.default.php");
 
 if (!file_exists('backup')) {
     mkdir('backup', 0777, true);
+}else{
+	$files = glob('../admin/backup/*'); // get directory contents
+		foreach ($files as $file) { // iterate files      
+			// Check if file
+			if (is_file($file)) {
+			unlink($file); // delete file
+			}
+		}	
 }
 
 $tabel = "*";
