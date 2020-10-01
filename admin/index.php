@@ -100,7 +100,7 @@
     }	
 </style>
 			</head>
-			<body class='hold-transition skin-green sidebar-mini fixed $sidebar'>
+			<body class='hold-transition skin-purple sidebar-mini fixed $sidebar'>
 			<div id='pesan'></div>
 			<div class='loader'></div>
 				<div class='wrapper'>
@@ -375,21 +375,21 @@
 									<a href='#'><i class='fa fa-circle text-green'></i> $pengawas[level]</a>
 								</div>
 							</div>
-							<ul class=' sidebar-menu tree data-widget='tree' >
+							<ul class=' sidebar-menu tree' data-widget='treeview' role='menu' >
 								 <!-- <li class='header'>MAIN MENU </li> -->
-								<li><a href='?'><img src='../dist/img/svg/home.svg' width='30'> <span>Dashboard</span></a></li>
+								<li class='treeview'><a href='?'><img src='../dist/img/svg/home.svg' width='30'> <span>Dashboard</span></a></li>
 								";
 								if($pengawas['level']=='admin') {
 									echo "
 									
-									<li class=' treeview'>
+									<li class='treeview'>
 										<a href='#'>
 										<img src='../dist/img/svg/genealogy.svg' width='30'>
 										<span>Data Master</span><span class='pull-right-container'> <i class='glyphicon glyphicon-plus pull-right'></i> </span>
             
 										</a>
 										 <ul class='treeview-menu'>
-										<li><a href='?pg=importmaster'><i class='fa fa-upload'></i> <span>Import Data Master</span><span class='pull-right-container'><small class='label pull-right bg-green'>new</small></span></a></li>
+										<li class='nav-item'><a class='nav-link' href='?pg=importmaster'><i class='fa fa-upload'></i> <span>Import Data Master</span><span class='pull-right-container'><small class='label pull-right bg-green'>new</small></span></a></li>
 										<li><a href='?pg=matapelajaran'><i class='fa  fa-circle-o text-red'></i> <span> Data Mata Pelajaran</span></a></li>";
 										if($setting['jenjang']=='SMK'){
 										echo"<li><a href='?pg=pk'><i class='fa  fa-circle-o text-red'></i> <span> Data Jurusan</span></a></li>";
@@ -454,7 +454,7 @@
 										<li class='treeview'><a href='?pg=filemanager'><img src='../dist/img/svg/folder.svg' width='30'> <span> File manager</span></a></li>
 										<li class='treeview'><a href='?pg=pengaturan'><img src='../dist/img/svg/services.svg' width='30'> <span>Pengaturan</span></a></li>																						
 										<li class='treeview' ><a href='#' id='tentang'><img src='../dist/img/svg/about.svg' width='30'> <span>Tentang</span></a></li>														
-											
+										<li><a href='logout.php' >&nbsp;<i class='fa fa-sign-out fa-2x'></i>&nbsp;&nbsp;&nbsp;&nbsp;Keluar</a></li>	
 										
 											
 									";
@@ -474,18 +474,13 @@
 										</ul>
 										</li>
 										<li><a href='?pg=nilai'><i class='fa  fa-tags'></i> <span>Hasil Nilai</span></a></li>
-										
+										<li><a href='logout.php' >&nbsp;<i class='fa fa-sign-out fa-2x'></i>&nbsp;&nbsp;&nbsp;&nbsp;Keluar</a></li>	
 										
 									";
 								}
 								if($setting['jenjang']=='SMK'){$jenjang='SMK/SMA/MA';}elseif($setting['jenjang']=='SMP'){$jenjang='SMP/MTS';}else{$jenjang='SD/MI';}
 								echo "
-								<li class='header text-center' id='end-sidebar'>
-									<div class='pull-center'>
-									<a href='logout.php' class='btn btn-sm btn-success btn-flat'><i class='fa fa-sign-out'></i> Keluar</a>
-									</div>
-								</li>
-								<li class='header text-center' id='end-sidebar'><b>TIM IT $setting[sekolah]<br/>OPMI Kota Batu 2019</b></li>
+								<li class='header text-center' id='end-sidebar'><b>TIM IT $setting[sekolah]<br/>D Kota Batu 2019</b></li>
 																				
 							</ul><!-- /.sidebar-menu -->
 						</section>
@@ -494,7 +489,7 @@
 					<div class='content-wrapper' style='background-image: url(backgroun.jpg);background-size: cover;'>
 					<section class='content-header'>
 								<h1><span class='hidden-xs'>$setting[aplikasi] </span>
-								<small class='label bg-blue'><strong>V 1.0 r5</strong>
+								<small class='label bg-blue'><strong>V 1.0 r6</strong>
 								</small>
 								</h1><div style='float:right; margin-top:-37px'>								
 								<button class='btn  btn-flat pull-right bg-purple' ><i class='fa fa-calendar'></i> ".buat_tanggal('D, d M Y')."</button>
@@ -702,7 +697,7 @@
 											</div><!-- /.box-header -->
 											<div class='box-body'>												
 													<p class='text-center'>
-														<iframe style='width: 100%;height: 470px;'src='$homeurl/admin/sys.php'></iframe>
+														<iframe style='width: 100%;height: 470px;'src='$homeurl/sys.php'></iframe>
 													</p>												
 											</div><!-- /.box-body -->
 										</div><!-- /.box -->
@@ -2316,52 +2311,7 @@
 							
 						}
 						elseif($pg=='status') {
-							if($ac=='') {
-								
-								
-								echo "
-									<div class='row'>
-										<div class='col-md-12'>
-										<div class='alert alert-warning alert-dismissible'>
-													<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
-													<i class='icon fa fa-info'></i>
-													Status peserta akan muncul saat ujian berlangsung ..
-													</div>
-											<div class='box box-primary'>
-												<div class='box-header with-border'>
-													<h3 class='box-title'>Status Peserta </h3>
-													<div class='box-tools pull-right btn-group'>
-														
-													</div>
-												</div><!-- /.box-header -->
-												<div class='box-body'>
-												<div class='table-responsive'>
-													<table  class='table table-bordered table-striped'>
-														<thead>
-															<tr>
-																<th width='5px'>#</th>
-																<th>NIS</th>
-																<th>Nama</th>
-																<th>Kelas</th>
-																<th>Mapel</th>
-																<th>Lama Ujian</th>
-																<th>Jawaban</th>
-																<th>Nilai</th>
-																<th>Ip Address</th>
-																<th >Status</th>
-																
-															</tr>
-														</thead>
-														<tbody id='divstatus'>
-														</tbody>
-													</table>
-													</div>
-												</div><!-- /.box-body -->
-											</div><!-- /.box -->
-										</div>
-									</div>
-								";
-							}
+							include 'status.php';
 							
 						}
 	
@@ -5885,7 +5835,7 @@ echo "
 							<div class='pull-left hidden-xs'>
 								<strong>
 									<span id='end-sidebar'>
-										$setting[sekolah] support by $copyright OPMI Kota Batu V $setting[versi]
+										$setting[sekolah] support by $copyright D Kota Batu V $setting[versi]
 									</span>
 								</strong>
 							</div>
@@ -5914,9 +5864,11 @@ echo "
 				<script src='$homeurl/plugins/notify/js/notify.js'></script>
 				<script src='$homeurl/plugins/sweetalert2/dist/sweetalert2.min.js'></script>
 				
-
-				
 				<script>
+				$('#refreshstatus').on('click', function(){					
+					$('#divstatus').load('$homeurl/admin/statuspeserta.php');						
+				});
+				
 				
 				$('.loader').fadeOut('slow');				
   					$(function () {    				
@@ -5932,11 +5884,12 @@ echo "
 							
 						}, 1000
 					);
+					//AUTO REFRESH STATUS SISWA 5 MENIT
 					var autoRefresh = setInterval(
 						function () {
 							$('#divstatus').load('$homeurl/admin/statuspeserta.php');	
-						}, 1000
-					);
+						}, 300000
+					);	
 					var autoRefresh = setInterval(
 						function () {
 							
@@ -6755,6 +6708,21 @@ $(window).scroll(function() {
   }); // left menu link3 click() scroll END
 
 }); // ready() END
-</script> 				
+</script>
+<script>
+$(document).ready(function(){
+	// memberi class agar tetap terbuka ketika di klik
+	var url = window.location;
+	// untuk sidebar, tidak termasuk treeview
+	$('ul.sidebar-menu a').filter(function() {
+		return this.href == url;
+	}).parentsUntil(".treeview-menu").addClass('active').prev('a').addClass('active')
+
+	// Tree view
+	$('ul.treeview-menu a').filter(function() {
+		return this.href == url;
+	}).parentsUntil(".sidebar-menu > .treeview-menu").addClass('active').prev('a').addClass('active');
+});
+</script>				
 			</body>
 		</html>
